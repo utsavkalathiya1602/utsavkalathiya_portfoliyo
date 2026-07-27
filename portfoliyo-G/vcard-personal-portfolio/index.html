@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,6 +23,45 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!--
+    - portfolio project card size fix
+    - forces every project card / thumbnail to the same fixed size
+      regardless of the original screenshot's dimensions
+  -->
+  <style>
+    .project-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    .project-item {
+      width: 100%;
+    }
+
+    .project-item a {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .project-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .project-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
@@ -48,7 +87,7 @@
         <div class="info-content">
           <h1 class="name" title="Richard hanrick">Utsav Kalathiya</h1>
 
-          <p class="title">MERN Stack developer</p>
+          <p class="title">Full Stack Developer</p>
         </div>
 
         <button class="info_more-btn" data-sidebar-btn>
@@ -209,11 +248,11 @@
 
         <section class="about-text">
           <p>
-         Aspiring Full-Stack Developer with a solid foundation in the MERN stack, including front-end expertise in React.js, JavaScript, HTML5, and CSS3 with Tailwind CSS to build responsive, user-centric web applications. Skilled in creating intuitive interfaces and delivering seamless user experiences through modern design practices and clean code.
+         Full Stack Developer with hands-on experience across the MERN and MEAN stacks, including Angular version upgrades, React.js/React Native development, and RESTful API integration. Comfortable owning frontend features end-to-end — from UI redesign to bug fixing — across both web and mobile platforms.
           </p>
 
           <p>
-          Currently expanding back-end proficiency with Node.js, Express.js, and MongoDB to strengthen full-stack capabilities. Eager to apply this comprehensive skill set to contribute to innovative projects in an entry-level full-stack or front-end developer role. A quick learner, passionate about writing efficient code and thriving in collaborative development environments.
+          Strong foundation in database design (MongoDB, MySQL, PostgreSQL) and a track record of delivering clean, maintainable code on client projects at WRT InfoTech and NIQOX. A quick learner, passionate about writing efficient code and thriving in collaborative development environments.
           </p>
         </section>
 
@@ -301,104 +340,6 @@
         <!--
           - testimonials
         -->
-
-        <!-- <section class="testimonials">
-
-          <h3 class="h3 testimonials-title">Testimonials</h3>
-
-          <ul class="testimonials-list has-scrollbar">
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Daniel lewis</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Jessica miller</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Emily evans</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Henry william</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-          </ul>
-
-        </section> -->
 
 <section class="testimonials">
 
@@ -535,57 +476,6 @@
 
         </div>
 
-
-        <!--
-          - clients
-        -->
-<!-- 
-        <section class="clients">
-
-          <h3 class="h3 clients-title">Clients</h3>
-
-          <ul class="clients-list has-scrollbar">
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-1-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-2-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-3-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-4-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-5-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-6-color.png" alt="client logo">
-              </a>
-            </li>
-
-          </ul>
-
-        </section> -->
-
       </article>
 
 
@@ -616,40 +506,78 @@
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">Bachelor of Computer Applications (VNSGU)</h4>
+              <h4 class="h4 timeline-item-title">Master of Computer Applications (MCA) – Online</h4>
+
+              <span>In Progress</span>
+
+              <p class="timeline-text">
+        Pursuing MCA online at Manipal University Jaipur to deepen expertise in advanced software development and computer science fundamentals.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Bachelor of Computer Applications (BCA)</h4>
 
               <span>Aug 2022 - March 2025</span>
 
               <p class="timeline-text">
-        Pursuing BCA with a strong focus on web development, databases, and programming fundamentals. 
-        Gained hands-on experience through academic projects and practical applications of modern technologies.
-
+        Sutex Bank College of Computer Application | GPA: 8.5. Built a strong focus on web development, databases, and programming fundamentals, with hands-on experience through academic projects and practical applications of modern technologies.
               </p>
 
             </li>
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">Higher Secondary Certificate (HSC) – Commerce Stream</h4>
+              <h4 class="h4 timeline-item-title">Higher Secondary Certificate (HSC) – Commerce</h4>
 
               <span>March 2021 - March 2022</span>
 
               <p class="timeline-text">
-                 Completed HSC in Commerce with distinction, building a strong foundation in analytical and problem-solving skills. 
-        Actively participated in academic and extracurricular activities.
+                 Nalanda Vidhyalaya, Surat | 91%. Completed HSC in Commerce, building a strong foundation in analytical and problem-solving skills.
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="briefcase-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Experience</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Full Stack Developer – WRT InfoTech</h4>
+
+              <span>Nov 2025 - Apr 2026</span>
+
+              <p class="timeline-text">
+                Project Ciphus (Angular): Upgraded a legacy Angular application from version 11 to version 19, redesigned key UI screens, integrated backend REST APIs, and resolved functional/UI bugs.
+                <br>
+                Project FamePilot (React & React Native): Developed and maintained the web app (React.js) and mobile app (React Native), integrated RESTful APIs, designed new UI features, and debugged issues across web and mobile platforms.
               </p>
 
             </li>
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">Secondary School Certificate</h4>
+              <h4 class="h4 timeline-item-title">Full Stack Developer Intern – NIQOX</h4>
 
-              <span>March 2020 - March 2021</span>
+              <span>Jul 2025 - Sep 2025</span>
 
               <p class="timeline-text">
-                Successfully completed SSC with excellent academic performance. 
-        Developed interest in technology and computer science during this stage.
+                Learned and applied MERN stack development through real-world project work. Built a Job Portal web application with user authentication and full CRUD functionality, gaining hands-on experience with Node.js, Express.js, and MongoDB.
               </p>
 
             </li>
@@ -672,46 +600,41 @@
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">JobPortal FullStack Website</h4>
+              <h4 class="h4 timeline-item-title">Real Estate Marketplace (House Rent & Sell)</h4>
+
+              <span>Tech Stack: React.js, Tailwind CSS, Node.js, Express.js, MongoDB, TensorFlow.js</span>
+
+              <p class="timeline-text">
+             Built a responsive React.js/Tailwind CSS UI with RESTful APIs (Node.js, Express.js) for end-to-end property management, including JWT/Google OAuth login and Leaflet-based location search.
+Integrated AI-based image validation with TensorFlow.js and designed MongoDB schemas for efficient data storage and filtering.
+
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Kisan Bazaar</h4>
+
+              <span>Tech Stack: React.js, Tailwind CSS, Node.js, Express.js, MongoDB, JWT, Bcrypt</span>
+
+              <p class="timeline-text">
+               Implemented multi-role authentication (JWT, Bcrypt) and RESTful APIs for products, orders, and users.
+Built an admin dashboard with full CRUD and inventory management, with a responsive UI in Tailwind CSS.
+
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Job Portal Application</h4>
 
               <span>Tech Stack: React.js, Node.js, Express.js, MongoDB, Tailwind CSS</span>
 
               <p class="timeline-text">
-             Built a responsive job board with React.js, Tailwind CSS, and a Node.js/Express.js backend.
-Implemented role-based access control (RBAC) for separate user and company workflows.
+              Built user authentication with role-based access control (RBAC) for separate user and company workflows.
 Designed RESTful APIs to handle job postings, applications, and user profile management.
-Connected frontend to a MongoDB database to serve dynamic content and process user data.
-
-
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">GYM - FullStack Website</h4>
-
-              <span>Tech Stack: React.js, Node.js, Express.js, MongoDB, CSS</span>
-
-              <p class="timeline-text">
-               Developed a full-stack web app with React.js frontend and Node.js/Express.js RESTful API backend. Implemented JWT authentication and full CRUD operations for managing members, trainers, and payments.
-Utilized MongoDB for data persistence and modern CSS for a responsive admin interface.
-Engineered seamless data flow between client and server for a dynamic user experience.
-
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">ToDo - Frontend Website</h4>
-
-              <span>Tech Stack: React.js, CSS</span>
-
-              <p class="timeline-text">
-              Created a responsive single-page application (SPA) using React.js for state management.
-Implemented core features to add, edit, delete, and mark tasks as complete.
-Dynamically handled user interactions and UI updates through React hooks (useState). Styled with CSS to ensure a clean and intuitive user interface on all device sizes.
 
               </p>
 
@@ -754,7 +677,20 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
             <li class="skills-item">
 
               <div class="title-wrapper">
-                <h5 class="h5">Web design</h5>
+                <h5 class="h5">Angular</h5>
+                <data value="65">65%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 65%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Database Design (MongoDB, MySQL, PostgreSQL)</h5>
                 <data value="70">70%</data>
               </div>
 
@@ -764,20 +700,18 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
 
             </li>
 
-            <!-- <li class="skills-item">
+            <li class="skills-item">
 
               <div class="title-wrapper">
-                <h5 class="h5">Branding</h5>
-                <data value="90">90%</data>
+                <h5 class="h5">Mobile Development (React Native)</h5>
+                <data value="60">60%</data>
               </div>
 
               <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
+                <div class="skill-progress-fill" style="width: 60%;"></div>
               </div>
 
-            </li> -->
-
-          
+            </li>
 
           </ul>
 
@@ -811,10 +745,6 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
               <button data-filter-btn>Web design</button>
             </li>
 
-            <!-- <li class="filter-item">
-              <button data-filter-btn>Applications</button>
-            </li> -->
-
             <li class="filter-item">
               <button data-filter-btn>Web development</button>
             </li>
@@ -842,10 +772,6 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
               <li class="select-item">
                 <button data-select-item>Web design</button>
               </li>
-
-              <!-- <li class="select-item">
-                <button data-select-item>Applications</button>
-              </li> -->
 
               <li class="select-item">
                 <button data-select-item>Web development</button>
@@ -895,28 +821,7 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
             </li>
 
 
-            
-
-<!--             ----------------------------- -->
-<!--   <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="https://superio-job-portal-frontend.vercel.app/">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/JobPortal-HomePage.png" alt="Job Portal" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Job-Portal Website</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li> -->
-<!--             ------------------------------------ -->
-             <li class="project-item  active" data-filter-item data-category="Web development">
+             <li class="project-item  active" data-filter-item data-category="web development">
               <a href="https://job-hunting-frontend.vercel.app/">
 
                 <figure class="project-img">
@@ -934,9 +839,8 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
               </a>
             </li>
 
-<!--             ------------------------ -->
-                        <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="https://github.com/utsavkalathiya1602" target="_blank" rel="noopener noreferrer">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -953,7 +857,7 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
               </a>
             </li>
 
-<!--             <li class="project-item  active" data-filter-item data-category="web development">
+            <li class="project-item  active" data-filter-item data-category="web development">
               <a href="https://mern-todofy.netlify.app/">
 
                 <figure class="project-img">
@@ -969,101 +873,96 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
                 <p class="project-category">Web development</p>
 
               </a>
-            </li> -->
-
-<!--             ------------- -->
- <li class="project-item  active" data-filter-item data-category="Web development">
-              <a href="https://mern-todofy.netlify.app/">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/ToDo-HomePage.png" alt="ToDo-HomePage" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">To-Do Website</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-<!-- ---------------------- -->
-
-          
-
-            <li class="project-item  active" data-filter-item data-category="">
-              <!-- <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">MetaSpark</h3>
-
-                <p class="project-category">Web design</p>
-
-              </a> -->
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="">
-              <!-- <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-7.png" alt="summary" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Summary</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a> -->
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <!-- <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Task Manager</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a> -->
             </li>
 
             <li class="project-item  active" data-filter-item data-category="web development">
-              <!-- <a href="#">
+              <a href="https://devamevent.onrender.com/" target="_blank" rel="noopener noreferrer">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <img src="./assets/images/project-9.png" alt="arrival" loading="lazy">
+                  <img src="./assets/images/image.png" alt="Event Planner Website" loading="lazy">
                 </figure>
 
-                <h3 class="project-title">Arrival</h3>
+                <h3 class="project-title">Event Planner Website</h3>
 
                 <p class="project-category">Web development</p>
 
-              </a> -->
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="https://aeromet-mauve.vercel.app/normal" target="_blank" rel="noopener noreferrer">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/image copy.png" alt="Aeromet Weather App" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Aeromet - Weather App</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="https://github.com/Kalathiyautsav0001/House-Renting" target="_blank" rel="noopener noreferrer">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/image copy 3.png" alt="Real Estate Marketplace (House Rent & Sell)" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Real Estate Marketplace (House Rent &amp; Sell)</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="https://github.com/Kalathiyautsav0001/splitswise--reactnative-app" target="_blank" rel="noopener noreferrer">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/image copy 4.png" alt="Splitwise React Native App" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Splitwise - React Native App</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="https://github.com/Kalathiyautsav0001/E-Com--Full-stack-website" target="_blank" rel="noopener noreferrer">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/image copy 2.png" alt="E-Commerce Full Stack Website" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">E-Commerce - Full Stack Website</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
             </li>
 
           </ul>
@@ -1094,23 +993,23 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
               <a href="#">
 
                 <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-1.jpg" alt="Design conferences in 2022" loading="lazy">
+                  <img src="./assets/images/blog-1.jpg" alt="What my BCA actually taught me about becoming a developer" loading="lazy">
                 </figure>
 
                 <div class="blog-content">
 
                   <div class="blog-meta">
-                    <p class="blog-category">Design</p>
+                    <p class="blog-category">Education</p>
 
                     <span class="dot"></span>
 
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
+                    <time datetime="2025-03-15">Mar 15, 2025</time>
                   </div>
 
-                  <h3 class="h3 blog-item-title">Design conferences in 2022</h3>
+                  <h3 class="h3 blog-item-title">What My BCA Actually Taught Me About Becoming a Developer</h3>
 
                   <p class="blog-text">
-                    Veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
+                    Looking back at three years at Sutex Bank College of Computer Application, the biggest lessons weren't in the syllabus — they were in the projects, the late debugging sessions, and learning to think like an engineer.
                   </p>
 
                 </div>
@@ -1122,23 +1021,23 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
               <a href="#">
 
                 <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-2.jpg" alt="Best fonts every designer" loading="lazy">
+                  <img src="./assets/images/blog-2.jpg" alt="Why I chose an online MCA focused on AI and ML" loading="lazy">
                 </figure>
 
                 <div class="blog-content">
 
                   <div class="blog-meta">
-                    <p class="blog-category">Design</p>
+                    <p class="blog-category">Career Growth</p>
 
                     <span class="dot"></span>
 
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
+                    <time datetime="2025-09-10">Sep 10, 2025</time>
                   </div>
 
-                  <h3 class="h3 blog-item-title">Best fonts every designer</h3>
+                  <h3 class="h3 blog-item-title">Why I'm Pursuing an Online MCA With a Focus on AI &amp; ML</h3>
 
                   <p class="blog-text">
-                    Sed ut perspiciatis, nam libero tempore, cum soluta nobis est eligendi.
+                    Working full-time as a developer while studying online isn't easy, but building real products showed me how much AI and machine learning are shaping the tools we use every day — and I wanted to understand them, not just use them.
                   </p>
 
                 </div>
@@ -1150,23 +1049,23 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
               <a href="#">
 
                 <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-3.jpg" alt="Design digest #80" loading="lazy">
+                  <img src="./assets/images/blog-3.jpg" alt="From intern to full stack developer, my first year in tech" loading="lazy">
                 </figure>
 
                 <div class="blog-content">
 
                   <div class="blog-meta">
-                    <p class="blog-category">Design</p>
+                    <p class="blog-category">Career</p>
 
                     <span class="dot"></span>
 
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
+                    <time datetime="2026-04-20">Apr 20, 2026</time>
                   </div>
 
-                  <h3 class="h3 blog-item-title">Design digest #80</h3>
+                  <h3 class="h3 blog-item-title">From Intern to Full Stack Developer: My First Year in Tech</h3>
 
                   <p class="blog-text">
-                    Excepteur sint occaecat cupidatat no proident, quis nostrum exercitationem ullam corporis suscipit.
+                    From my first internship at NIQOX building a Job Portal in the MERN stack, to upgrading a legacy Angular app and shipping React Native features at WRT InfoTech — here's what actually changed in how I write code.
                   </p>
 
                 </div>
@@ -1178,79 +1077,23 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
               <a href="#">
 
                 <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-4.jpg" alt="UI interactions of the week" loading="lazy">
+                  <img src="./assets/images/blog-4.jpg" alt="Balancing life, work, and continuous learning as a young developer" loading="lazy">
                 </figure>
 
                 <div class="blog-content">
 
                   <div class="blog-meta">
-                    <p class="blog-category">Design</p>
+                    <p class="blog-category">Life &amp; Reflections</p>
 
                     <span class="dot"></span>
 
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
+                    <time datetime="2026-06-05">Jun 5, 2026</time>
                   </div>
 
-                  <h3 class="h3 blog-item-title">UI interactions of the week</h3>
+                  <h3 class="h3 blog-item-title">Balancing Work, an Online Degree, and Life as a Young Developer</h3>
 
                   <p class="blog-text">
-                    Enim ad minim veniam, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris nisi.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-5.jpg" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">The forgotten art of spacing</h3>
-
-                  <p class="blog-text">
-                    Maxime placeat, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-6.jpg" alt="Design digest #79" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #79</h3>
-
-                  <p class="blog-text">
-                    Optio cumque nihil impedit uo minus quod maxime placeat, velit esse cillum.
+                    Some honest thoughts on juggling a full-time developer job, an online MCA, and personal projects — and why slowing down occasionally makes the code (and the person writing it) better.
                   </p>
 
                 </div>
@@ -1286,28 +1129,6 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
           </figure>
         </section>
 
-        <!-- <section class="contact-form">
-
-          <h3 class="h3 form-title">Contact Form</h3>
-
-          <form action="#" class="form" data-form>
-
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
-            </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit"  data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-
-          </form>
-
-        </section> -->
         <section class="contact-form">
   <h3 class="h3 form-title">Contact Form</h3>
 
@@ -1337,19 +1158,19 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-  // ✅ Initialize EmailJS with your Public Key
+  // Initialize EmailJS with your Public Key
   emailjs.init("c6Vh259Be4de_HjwF");  
 
-  // ✅ Form submit event
+  // Form submit event
   document.getElementById("contact-form").addEventListener("submit", function(event) {
     event.preventDefault();
 
     emailjs.sendForm("service_71dr4th", "template_a74htz8", this)
       .then(() => {
-        alert("✅ Message sent successfully!");
+        alert("Message sent successfully!");
         document.getElementById("contact-form").reset(); // clear form
       }, (error) => {
-        alert("❌ Failed to send message. Error: " + JSON.stringify(error));
+        alert("Failed to send message. Error: " + JSON.stringify(error));
       });
   });
 </script>
@@ -1368,20 +1189,3 @@ Dynamically handled user interactions and UI updates through React hooks (useSta
 
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
