@@ -69,6 +69,45 @@
       object-position: top center;
       display: block;
     }
+
+    .about-highlights-title {
+  color: var(--white-2, #fff);
+  margin-block-end: 20px;
+}
+
+.about-highlights-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px 20px;
+  margin-block-end: 30px;
+}
+
+.about-highlights-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.about-highlights-item ion-icon {
+  color: var(--orange-yellow-crayola, #ffb100);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.about-highlights-item p {
+  color: var(--light-gray-70, #b3b3b3);
+  font-size: 14px;
+}
+
+@media (max-width: 450px) {
+  .about-highlights-list {
+    grid-template-columns: 1fr;
+  }
+}
+.service-icon-box ion-icon {
+  font-size: 34px;
+  color: var(--orange-yellow-crayola, #ffb100);
+}
   </style>
 </head>
 
@@ -149,7 +188,7 @@
             <div class="contact-info">
               <p class="contact-title">Birthday</p>
 
-              <time datetime="1982-06-23">Feb 16, 2005</time>
+              <time datetime="2005-02-16">Feb 16, 2005</time>
             </div>
 
           </li>
@@ -182,7 +221,7 @@
 
           <li class="social-item">
             <a href="https://github.com/utsavkalathiya1602" class="social-link">
-             <ion-icon name="logo-github"></ion-icon>
+                <ion-icon name="logo-github"></ion-icon>
             </a>
           </li>
 
@@ -238,11 +277,11 @@
 
 
 
-      <!--
+<!--
         - #ABOUT
       -->
 
-      <article class="about  active" data-page="about">
+      <article class="about active" data-page="about">
 
         <header>
           <h2 class="h2 article-title">About me</h2>
@@ -250,89 +289,59 @@
 
         <section class="about-text">
           <p>
-         Full Stack Developer with hands-on experience across the MERN and MEAN stacks, including Angular version upgrades, React.js/React Native development, and RESTful API integration. Comfortable owning frontend features end-to-end — from UI redesign to bug fixing — across both web and mobile platforms.
+            I'm a Full Stack Developer with hands-on experience across the MERN and MEAN stacks —
+            including upgrading a legacy Angular application from v11 to v19, building and maintaining
+            React.js and React Native apps, and integrating RESTful APIs end-to-end. I'm comfortable
+            owning frontend features from UI redesign to bug fixing, across both web and mobile platforms.
           </p>
 
           <p>
-          Strong foundation in database design (MongoDB, MySQL, PostgreSQL) and a track record of delivering clean, maintainable code on client projects at WRT InfoTech and NIQOX. A quick learner, passionate about writing efficient code and thriving in collaborative development environments.
+            I have a strong foundation in database design across MongoDB, MySQL, and PostgreSQL, with a
+            track record of delivering clean, maintainable code on real client projects at WRT InfoTech
+            and NIQOX. I'm a quick learner who enjoys collaborative, fast-paced development environments.
           </p>
         </section>
 
 
         <!--
-          - service
+          - about highlights
         -->
 
-        <section class="service">
+        <section class="about-highlights">
 
-          <h3 class="h3 service-title">What i'm doing</h3>
+          <h3 class="h3 about-highlights-title">Quick highlights</h3>
 
-          <ul class="service-list">
- <li class="service-item">
+          <ul class="about-highlights-list">
 
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Web development</h4>
-
-                <p class="service-item-text">
-                  High-quality development of sites at the professional level.
-                </p>
-              </div>
-
-            </li>
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg
-                " alt="design icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Web design</h4>
-
-                <p class="service-item-text">
-                  The most modern and high-quality design made at a professional level.
-                </p>
-              </div>
-
+            <li class="about-highlights-item">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <p>Full Stack Developer across the MERN &amp; MEAN stacks</p>
             </li>
 
-           
+            <li class="about-highlights-item">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <p>Upgraded a legacy Angular app from v11 to v19</p>
+            </li>
 
-            <!-- <li class="service-item">
+            <li class="about-highlights-item">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <p>Built and maintained apps in React.js and React Native</p>
+            </li>
 
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
-              </div>
+            <li class="about-highlights-item">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <p>Strong database foundation: MongoDB, MySQL, PostgreSQL</p>
+            </li>
 
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Mobile apps</h4>
+            <li class="about-highlights-item">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <p>Client project experience at WRT InfoTech &amp; NIQOX</p>
+            </li>
 
-                <p class="service-item-text">
-                  Professional development of applications for iOS and Android.
-                </p>
-              </div>
-
-            </li> -->
-
-            <!-- <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-photo.svg" alt="camera icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Photography</h4>
-
-                <p class="service-item-text">
-                  I make high-quality photos of any category at a professional level.
-                </p>
-              </div>
-
-            </li> -->
+            <li class="about-highlights-item">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <p>Comfortable owning frontend features end-to-end</p>
+            </li>
 
           </ul>
 
@@ -340,99 +349,179 @@
 
 
         <!--
+          - service
+        -->
+        <section class="service">
+
+          <h3 class="h3 service-title">What I'm doing</h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Full Stack Development</h4>
+
+                <p class="service-item-text">
+                  Building end-to-end web applications with the MERN and MEAN stacks — from RESTful
+                  API design and database schemas to production-ready UI.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-design.svg" alt="frontend icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Frontend Development</h4>
+
+                <p class="service-item-text">
+                  Building and redesigning responsive UI with React.js, Angular, and Tailwind CSS /
+                  Bootstrap, with a focus on clean, maintainable component structure.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Mobile App Development</h4>
+
+                <p class="service-item-text">
+                  Developing and maintaining cross-platform mobile apps with React Native, sharing
+                  logic and API integration with the web codebase.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <ion-icon name="server-outline"></ion-icon>
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Database &amp; API Design</h4>
+
+                <p class="service-item-text">
+                  Designing relational and document database schemas across MongoDB, MySQL, and
+                  PostgreSQL, and building secure, well-structured RESTful APIs to power them.
+                </p>
+              </div>
+
+            </li>
+
+          </ul>
+
+        </section>
+
+        <!--
           - testimonials
         -->
 
-<section class="testimonials">
+        <section class="testimonials">
 
-  <h3 class="h3 testimonials-title">Testimonials</h3>
+          <h3 class="h3 testimonials-title">Testimonials</h3>
 
-  <ul class="testimonials-list has-scrollbar">
+          <ul class="testimonials-list has-scrollbar">
 
-    <li class="testimonials-item">
-      <div class="content-card" data-testimonials-item>
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
 
-        <figure class="testimonials-avatar-box">
-          <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="60" data-testimonials-avatar>
-        </figure>
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="60" data-testimonials-avatar>
+                </figure>
 
-        <h4 class="h4 testimonials-item-title" data-testimonials-title>Daniel Lewis</h4>
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Daniel Lewis</h4>
 
-        <div class="testimonials-text" data-testimonials-text>
-          <p>
-            Utsav developed a responsive Job Portal for our team with user and company workflows.
-            His strong React.js and backend skills made the platform smooth and scalable.
-            We highly recommend him for full-stack projects.
-          </p>
-        </div>
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    Utsav developed a responsive Job Portal for our team with user and company workflows.
+                    His strong React.js and backend skills made the platform smooth and scalable.
+                    We highly recommend him for full-stack projects.
+                  </p>
+                </div>
 
-      </div>
-    </li>
+              </div>
+            </li>
 
-    <li class="testimonials-item">
-      <div class="content-card" data-testimonials-item>
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
 
-        <figure class="testimonials-avatar-box">
-          <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" data-testimonials-avatar>
-        </figure>
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" data-testimonials-avatar>
+                </figure>
 
-        <h4 class="h4 testimonials-item-title" data-testimonials-title>Jessica Miller</h4>
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Jessica Miller</h4>
 
-        <div class="testimonials-text" data-testimonials-text>
-          <p>
-            We worked with Utsav on an E-commerce website project.
-            He built an intuitive UI, integrated secure payment flow, and ensured mobile responsiveness.
-            His problem-solving approach and communication were excellent throughout.
-          </p>
-        </div>
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    We worked with Utsav on an E-commerce website project.
+                    He built an intuitive UI, integrated a secure payment flow, and ensured mobile responsiveness.
+                    His problem-solving approach and communication were excellent throughout.
+                  </p>
+                </div>
 
-      </div>
-    </li>
+              </div>
+            </li>
 
-    <li class="testimonials-item">
-      <div class="content-card" data-testimonials-item>
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
 
-        <figure class="testimonials-avatar-box">
-          <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" data-testimonials-avatar>
-        </figure>
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" data-testimonials-avatar>
+                </figure>
 
-        <h4 class="h4 testimonials-item-title" data-testimonials-title>Emily Evans</h4>
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Emily Evans</h4>
 
-        <div class="testimonials-text" data-testimonials-text>
-          <p>
-            Utsav created a Gym Management System for us using React.js, Node.js, Express.js, and MongoDB.
-            The system streamlined member records, trainers, and payments in one place.
-            His ability to deliver end-to-end solutions impressed us a lot.
-          </p>
-        </div>
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    Utsav created a Gym Management System for us using React.js, Node.js, Express.js, and MongoDB.
+                    The system streamlined member records, trainers, and payments in one place.
+                    His ability to deliver end-to-end solutions impressed us a lot.
+                  </p>
+                </div>
 
-      </div>
-    </li>
+              </div>
+            </li>
 
-    <li class="testimonials-item">
-      <div class="content-card" data-testimonials-item>
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
 
-        <figure class="testimonials-avatar-box">
-          <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" data-testimonials-avatar>
-        </figure>
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" data-testimonials-avatar>
+                </figure>
 
-        <h4 class="h4 testimonials-item-title" data-testimonials-title>Henry William</h4>
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Henry William</h4>
 
-        <div class="testimonials-text" data-testimonials-text>
-          <p>
-           Utsav developed a simple yet powerful To-Do App to demonstrate his React.js skills.  
-  His clean code, use of modern frameworks, and focus on usability made the app efficient and user-friendly.  
-  A passionate developer who always delivers quality work.
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    Utsav developed a simple yet powerful To-Do App to demonstrate his React.js skills.
+                    His clean code, use of modern frameworks, and focus on usability made the app efficient and user-friendly.
+                    A passionate developer who always delivers quality work.
+                  </p>
+                </div>
 
-          </p>
-        </div>
+              </div>
+            </li>
 
-      </div>
-    </li>
+          </ul>
 
-  </ul>
-
-</section>
+        </section>
 
         <!--
           - testimonials modal
@@ -508,10 +597,11 @@
 
               <h4 class="h4 timeline-item-title">Master of Computer Applications (MCA) – Online</h4>
 
-              <span>In Progress</span>
+              <span>2025 – Present</span>
 
               <p class="timeline-text">
-        Pursuing MCA online at Manipal University Jaipur to deepen expertise in advanced software development and computer science fundamentals.
+                Pursuing MCA online at Manipal University Jaipur to deepen expertise in advanced
+                software development, algorithms, and computer science fundamentals while working full-time.
               </p>
 
             </li>
@@ -520,10 +610,11 @@
 
               <h4 class="h4 timeline-item-title">Bachelor of Computer Applications (BCA)</h4>
 
-              <span>Aug 2022 - March 2025</span>
+              <span>Aug 2022 – Mar 2025</span>
 
               <p class="timeline-text">
-        Sutex Bank College of Computer Application | GPA: 8.5. Built a strong focus on web development, databases, and programming fundamentals, with hands-on experience through academic projects and practical applications of modern technologies.
+                Sutex Bank College of Computer Application &mdash; GPA: 8.5. Focused on web development,
+                database systems, and programming fundamentals through academic projects and real-world technology applications.
               </p>
 
             </li>
@@ -532,10 +623,11 @@
 
               <h4 class="h4 timeline-item-title">Higher Secondary Certificate (HSC) – Commerce</h4>
 
-              <span>March 2021 - March 2022</span>
+              <span>Mar 2021 – Mar 2022</span>
 
               <p class="timeline-text">
-                 Nalanda Vidhyalaya, Surat | 91%. Completed HSC in Commerce, building a strong foundation in analytical and problem-solving skills.
+                Nalanda Vidhyalaya, Surat &mdash; 91%. Completed HSC in Commerce with distinction,
+                building a strong foundation in analytical thinking and problem-solving.
               </p>
 
             </li>
@@ -560,12 +652,15 @@
 
               <h4 class="h4 timeline-item-title">Full Stack Developer – WRT InfoTech</h4>
 
-              <span>Nov 2025 - Apr 2026</span>
+              <span>Nov 2025 – Apr 2026</span>
 
               <p class="timeline-text">
-                Project Ciphus (Angular): Upgraded a legacy Angular application from version 11 to version 19, redesigned key UI screens, integrated backend REST APIs, and resolved functional/UI bugs.
-                <br>
-                Project FamePilot (React & React Native): Developed and maintained the web app (React.js) and mobile app (React Native), integrated RESTful APIs, designed new UI features, and debugged issues across web and mobile platforms.
+                <strong>Project Ciphus (Angular):</strong> Upgraded a legacy Angular app from v11 to v19,
+                redesigned key UI screens, integrated backend REST APIs, and resolved functional and UI bugs.
+                <br><br>
+                <strong>Project FamePilot (React &amp; React Native):</strong> Developed and maintained the web app
+                (React.js) and mobile app (React Native), integrated RESTful APIs, built new UI features,
+                and debugged cross-platform issues.
               </p>
 
             </li>
@@ -574,10 +669,12 @@
 
               <h4 class="h4 timeline-item-title">Full Stack Developer Intern – NIQOX</h4>
 
-              <span>Jul 2025 - Sep 2025</span>
+              <span>Jul 2025 – Sep 2025</span>
 
               <p class="timeline-text">
-                Learned and applied MERN stack development through real-world project work. Built a Job Portal web application with user authentication and full CRUD functionality, gaining hands-on experience with Node.js, Express.js, and MongoDB.
+                Applied MERN stack development through real-world project work. Built a Job Portal
+                web application with user authentication, role-based access control, and full CRUD
+                functionality using Node.js, Express.js, and MongoDB.
               </p>
 
             </li>
@@ -590,38 +687,38 @@
 
           <div class="title-wrapper">
             <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
+              <ion-icon name="code-slash-outline"></ion-icon>
             </div>
 
-            <h3 class="h3">My Projects</h3>
+            <h3 class="h3">Key Projects</h3>
           </div>
 
           <ol class="timeline-list">
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">Real Estate Marketplace (House Rent & Sell)</h4>
+              <h4 class="h4 timeline-item-title">Real Estate Marketplace (House Rent &amp; Sell)</h4>
 
-              <span>Tech Stack: React.js, Tailwind CSS, Node.js, Express.js, MongoDB, TensorFlow.js</span>
+              <span>React.js, Tailwind CSS, Node.js, Express.js, MongoDB, TensorFlow.js</span>
 
               <p class="timeline-text">
-             Built a responsive React.js/Tailwind CSS UI with RESTful APIs (Node.js, Express.js) for end-to-end property management, including JWT/Google OAuth login and Leaflet-based location search.
-Integrated AI-based image validation with TensorFlow.js and designed MongoDB schemas for efficient data storage and filtering.
-
+                Built a responsive full-stack property platform with JWT/Google OAuth login and
+                Leaflet-based location search. Integrated AI image validation (TensorFlow.js) and
+                designed MongoDB schemas for efficient filtering and data storage.
               </p>
 
             </li>
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">Kisan Bazaar</h4>
+              <h4 class="h4 timeline-item-title">Kisan Bazaar – Farmer E-Commerce Platform</h4>
 
-              <span>Tech Stack: React.js, Tailwind CSS, Node.js, Express.js, MongoDB, JWT, Bcrypt</span>
+              <span>React.js, Tailwind CSS, Node.js, Express.js, MongoDB, JWT, Bcrypt</span>
 
               <p class="timeline-text">
-               Implemented multi-role authentication (JWT, Bcrypt) and RESTful APIs for products, orders, and users.
-Built an admin dashboard with full CRUD and inventory management, with a responsive UI in Tailwind CSS.
-
+                Implemented multi-role authentication (JWT, Bcrypt) and RESTful APIs for products,
+                orders, and users. Built a full-featured admin dashboard with CRUD and inventory
+                management, with a responsive Tailwind CSS UI.
               </p>
 
             </li>
@@ -630,12 +727,12 @@ Built an admin dashboard with full CRUD and inventory management, with a respons
 
               <h4 class="h4 timeline-item-title">Job Portal Application</h4>
 
-              <span>Tech Stack: React.js, Node.js, Express.js, MongoDB, Tailwind CSS</span>
+              <span>React.js, Node.js, Express.js, MongoDB, Tailwind CSS</span>
 
               <p class="timeline-text">
-              Built user authentication with role-based access control (RBAC) for separate user and company workflows.
-Designed RESTful APIs to handle job postings, applications, and user profile management.
-
+                Built role-based authentication (RBAC) with separate workflows for job seekers and
+                companies. Designed RESTful APIs for job postings, applications, and user profile
+                management with a responsive frontend.
               </p>
 
             </li>
@@ -653,7 +750,7 @@ Designed RESTful APIs to handle job postings, applications, and user profile man
             <li class="skills-item">
 
               <div class="title-wrapper">
-                <h5 class="h5">Frontend Devlopment</h5>
+                <h5 class="h5">Frontend Development</h5>
                 <data value="80">80%</data>
               </div>
 
@@ -662,15 +759,16 @@ Designed RESTful APIs to handle job postings, applications, and user profile man
               </div>
 
             </li>
-  <li class="skills-item">
+
+            <li class="skills-item">
 
               <div class="title-wrapper">
                 <h5 class="h5">Backend Development</h5>
-                <data value="50">50%</data>
+                <data value="55">55%</data>
               </div>
 
               <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 50%;"></div>
+                <div class="skill-progress-fill" style="width: 55%;"></div>
               </div>
 
             </li>
@@ -1130,22 +1228,26 @@ Designed RESTful APIs to handle job postings, applications, and user profile man
         </section>
 
         <section class="contact-form">
-  <h3 class="h3 form-title">Contact Form</h3>
 
-  <form id="contact-form" class="form">
-    <div class="input-wrapper">
-      <input type="text" name="fullname" class="form-input" placeholder="Full name" required>
-      <input type="email" name="email" class="form-input" placeholder="Email address" required>
-    </div>
+          <h3 class="h3 form-title">Contact Form</h3>
 
-    <textarea name="message" class="form-input" placeholder="Your Message" required></textarea>
+          <form id="contact-form" class="form">
 
-    <button class="form-btn" type="submit">
-      <ion-icon name="paper-plane"></ion-icon>
-      <span>Send Message</span>
-    </button>
-  </form>
-</section>
+            <div class="input-wrapper">
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required>
+              <input type="email" name="email" class="form-input" placeholder="Email address" required>
+            </div>
+
+            <textarea name="message" class="form-input" placeholder="Your Message" required></textarea>
+
+            <button class="form-btn" type="submit">
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Send Message</span>
+            </button>
+
+          </form>
+
+        </section>
 
       </article>
 
@@ -1156,24 +1258,25 @@ Designed RESTful APIs to handle job postings, applications, and user profile man
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-  // Initialize EmailJS with your Public Key
-  emailjs.init("c6Vh259Be4de_HjwF");  
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS with your Public Key
+    emailjs.init("c6Vh259Be4de_HjwF");
 
-  // Form submit event
-  document.getElementById("contact-form").addEventListener("submit", function(event) {
-    event.preventDefault();
+    // Form submit event
+    document.getElementById("contact-form").addEventListener("submit", function (event) {
+      event.preventDefault();
 
-    emailjs.sendForm("service_71dr4th", "template_a74htz8", this)
-      .then(() => {
-        alert("Message sent successfully!");
-        document.getElementById("contact-form").reset(); // clear form
-      }, (error) => {
-        alert("Failed to send message. Error: " + JSON.stringify(error));
-      });
-  });
-</script>
+      emailjs.sendForm("service_71dr4th", "template_a74htz8", this)
+        .then(() => {
+          alert("Message sent successfully!");
+          document.getElementById("contact-form").reset();
+        }, (error) => {
+          alert("Failed to send message. Error: " + JSON.stringify(error));
+        });
+    });
+  </script>
+
   <!--
     - custom js link
   -->
