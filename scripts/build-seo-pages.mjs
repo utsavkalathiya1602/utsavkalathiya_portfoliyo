@@ -192,11 +192,13 @@ const sidebar = () => `
 
     </aside>`;
 
+// same labels and order as the homepage tabs, so the menu never changes;
+// Blog only exists as a homepage tab, which /#blog opens
 const NAV = [
-  ["Home", "/"],
   ["About", "/about"],
-  ["Projects", "/projects"],
   ["Resume", "/resume"],
+  ["Portfolio", "/projects"],
+  ["Blog", "/#blog"],
   ["Contact", "/contact"],
 ];
 
@@ -241,7 +243,7 @@ export const footer = (indent = "      ") => `<footer class="site-footer">
 </footer>`.split("\n").map((l) => (l ? indent + l : l)).join("\n");
 
 const scripts = (extra = "") => `
-  <script src="/assets/js/script.js?v=2"></script>
+  <script src="/assets/js/script.js?v=3"></script>
 ${extra}
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>`;
@@ -466,7 +468,7 @@ ${educationTimeline("h3")}
           <p>See the <a class="text-link" href="/projects">projects</a> and <a class="text-link" href="/skills">skills</a> pages, or the full <a class="text-link" href="/resume">resume</a>.</p>
         </section>
 `;
-  write("experience.html", page({ url, title, description, graph, active: null, trail, h1: "Utsav Kalathiya — Experience", body }));
+  write("experience.html", page({ url, title, description, graph, active: "Resume", trail, h1: "Utsav Kalathiya — Experience", body }));
 }
 
 function skillsPage() {
@@ -501,7 +503,7 @@ ${skillGroups.map((g) => `          <div class="skill-group">
           <p>See these technologies in use on the <a class="text-link" href="/projects">projects page</a>, or read about my <a class="text-link" href="/experience">experience</a>.</p>
         </section>
 `;
-  write("skills.html", page({ url, title, description, graph, active: null, trail, h1: "Utsav Kalathiya — Skills", body }));
+  write("skills.html", page({ url, title, description, graph, active: "Resume", trail, h1: "Utsav Kalathiya — Skills", body }));
 }
 
 function projectsIndexPage() {
@@ -548,7 +550,7 @@ ${more.map((p) => projectCard(p, "h3")).join("\n")}
           <p>More code is on ${ext(person.github, "GitHub", "text-link")}. See also my <a class="text-link" href="/skills">skills</a> and <a class="text-link" href="/about">about page</a>.</p>
         </section>
 `;
-  write("projects/index.html", page({ url, title, description, graph, active: "Projects", trail, h1: "Projects by Utsav Kalathiya", body }));
+  write("projects/index.html", page({ url, title, description, graph, active: "Portfolio", trail, h1: "Projects by Utsav Kalathiya", body }));
 }
 
 function projectPage(p) {
@@ -632,7 +634,7 @@ ${others.map((o) => `            <li><a class="text-link" href="${projectUrl(o)}
           <p><a class="text-link" href="/projects">All projects</a> · <a class="text-link" href="/about">About ${person.name}</a></p>
         </section>
 `;
-  write(`projects/${p.slug}.html`, page({ url, title, description, graph, active: "Projects", trail, h1: esc(p.name), body }));
+  write(`projects/${p.slug}.html`, page({ url, title, description, graph, active: "Portfolio", trail, h1: esc(p.name), body }));
 }
 
 function resumePage() {

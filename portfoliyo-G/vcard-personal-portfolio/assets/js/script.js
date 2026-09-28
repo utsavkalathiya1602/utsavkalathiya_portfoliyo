@@ -158,22 +158,42 @@ if (form && formBtn) {
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
+// show one homepage tab ("about", "resume", "portfolio", "blog", "contact")
+const activatePage = function (name) {
+  let found = false;
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
+  for (let i = 0; i < pages.length; i++) {
+    const isMatch = pages[i].dataset.page === name;
+    pages[i].classList.toggle("active", isMatch);
+    if (navigationLinks[i]) navigationLinks[i].classList.toggle("active", isMatch);
+    if (isMatch) found = true;
+  }
+
+  return found;
+}
+
+if (pages.length && navigationLinks.length) {
+
+  // add event to all nav link; keep the URL in sync (/#resume) so tabs can be linked to
+  for (let i = 0; i < navigationLinks.length; i++) {
+    navigationLinks[i].addEventListener("click", function () {
+      const name = this.innerHTML.toLowerCase();
+      if (activatePage(name)) {
+        history.replaceState(null, "", name === "about" ? location.pathname : "#" + name);
         window.scrollTo(0, 0);
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
       }
-    }
+    });
+  }
 
-  });
+  // in-page links like <a href="#portfolio"> and links from other pages (/#blog)
+  const openTabFromHash = function () {
+    const name = location.hash.slice(1).toLowerCase();
+    if (name && activatePage(name)) window.scrollTo(0, 0);
+  }
+
+  window.addEventListener("hashchange", openTabFromHash);
+  openTabFromHash();
+
 }
 
 
