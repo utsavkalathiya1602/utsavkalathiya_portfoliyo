@@ -172,7 +172,7 @@ export const projects = [
     backend: ["Node.js", "Express.js", "MongoDB / Mongoose", "JWT", "bcrypt.js", "Google Auth Library", "Cloudinary", "Nodemailer", "Socket.IO"],
     languages: ["JavaScript"],
     repos: [{ label: "Source code", url: "https://github.com/Kalathiyautsav0001/House-Renting" }],
-    live: null,
+    live: "https://house-renting-2.onrender.com/",
   },
   {
     slug: "kisan-bazaar",
