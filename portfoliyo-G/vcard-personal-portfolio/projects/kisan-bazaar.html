@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisan Bazaar – Farmer E-Commerce Platform | Project by Utsav Kalathiya</title>
+  <meta name="description" content="An e-commerce platform for farmers with multi-role authentication, RESTful APIs for products, orders and users, and an admin dashboard for inventory management. Built by Utsav Kalathiya.">
+  <link rel="canonical" href="https://utsavkalathiya.vercel.app/projects/kisan-bazaar">
+  <meta name="author" content="Utsav Kalathiya">
+  <meta name="theme-color" content="#121212">
+
+  <meta property="og:site_name" content="Utsav Kalathiya">
+  <meta property="og:title" content="Kisan Bazaar – Farmer E-Commerce Platform | Project by Utsav Kalathiya">
+  <meta property="og:description" content="An e-commerce platform for farmers with multi-role authentication, RESTful APIs for products, orders and users, and an admin dashboard for inventory management. Built by Utsav Kalathiya.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://utsavkalathiya.vercel.app/projects/kisan-bazaar">
+  <meta property="og:image" content="https://utsavkalathiya.vercel.app/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Utsav Kalathiya — Full Stack Developer">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kisan Bazaar – Farmer E-Commerce Platform | Project by Utsav Kalathiya">
+  <meta name="twitter:description" content="An e-commerce platform for farmers with multi-role authentication, RESTful APIs for products, orders and users, and an admin dashboard for inventory management. Built by Utsav Kalathiya.">
+  <meta name="twitter:image" content="https://utsavkalathiya.vercel.app/assets/images/og-image.png">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=2">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://utsavkalathiya.vercel.app/projects/kisan-bazaar#webpage",
+      "url": "https://utsavkalathiya.vercel.app/projects/kisan-bazaar",
+      "name": "Kisan Bazaar – Farmer E-Commerce Platform | Project by Utsav Kalathiya",
+      "description": "An e-commerce platform for farmers with multi-role authentication, RESTful APIs for products, orders and users, and an admin dashboard for inventory management. Built by Utsav Kalathiya.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://utsavkalathiya.vercel.app/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://utsavkalathiya.vercel.app/projects/kisan-bazaar#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://utsavkalathiya.vercel.app/projects/kisan-bazaar#project"
+      },
+      "author": {
+        "@id": "https://utsavkalathiya.vercel.app/#person"
+      },
+      "dateModified": "2026-09-28"
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://utsavkalathiya.vercel.app/projects/kisan-bazaar#project",
+      "name": "Kisan Bazaar – Farmer E-Commerce Platform",
+      "description": "An e-commerce platform for farmers with multi-role authentication, RESTful APIs for products, orders and users, and an admin dashboard for inventory management.",
+      "url": "https://utsavkalathiya.vercel.app/projects/kisan-bazaar",
+      "author": {
+        "@id": "https://utsavkalathiya.vercel.app/#person"
+      },
+      "creator": {
+        "@id": "https://utsavkalathiya.vercel.app/#person"
+      },
+      "keywords": "React.js, Tailwind CSS, Node.js, Express.js, MongoDB, JWT, Bcrypt"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://utsavkalathiya.vercel.app/projects/kisan-bazaar#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://utsavkalathiya.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Projects",
+          "item": "https://utsavkalathiya.vercel.app/projects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Kisan Bazaar – Farmer E-Commerce Platform",
+          "item": "https://utsavkalathiya.vercel.app/projects/kisan-bazaar"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+
+</head>
+
+<body>
+
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <main>
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="/assets/images/utsav-kalathiya-full-stack-developer.png" alt="Utsav Kalathiya - Full Stack Developer" width="80" height="78">
+        </figure>
+
+        <div class="info-content">
+          <p class="name" title="Utsav Kalathiya"><a href="/" style="color: inherit;">Utsav Kalathiya</a></p>
+
+          <p class="title">Full Stack Developer</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn aria-expanded="false" aria-label="Show contacts">
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:utsavkalathiya0001@gmail.com" class="contact-link">utsavkalathiya0001@gmail.com</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="location-outline" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Surat, Gujarat, India</address>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-github" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+              <a href="https://github.com/utsavkalathiya1602" class="contact-link" target="_blank" rel="noopener noreferrer">github.com/utsavkalathiya1602</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">LinkedIn</p>
+              <a href="https://www.linkedin.com/in/utsavkalathiya1602/" class="contact-link" target="_blank" rel="noopener noreferrer">linkedin.com/in/utsavkalathiya1602</a>
+            </div>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+    <div class="main-content">
+
+      <nav class="navbar" aria-label="Main">
+
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="/" class="navbar-link">Home</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/about" class="navbar-link">About</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/projects" class="navbar-link active" aria-current="page">Projects</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/resume" class="navbar-link">Resume</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/contact" class="navbar-link">Contact</a>
+          </li>
+        </ul>
+
+      </nav>
+
+      <article class="active" id="content">
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><span aria-current="page">Kisan Bazaar – Farmer E-Commerce Platform</span></li>
+          </ol>
+        </nav>
+
+        <header>
+          <h1 class="h2 article-title">Kisan Bazaar – Farmer E-Commerce Platform</h1>
+        </header>
+
+
+        <section class="content-section">
+          <p class="intro-lead">An e-commerce platform for farmers with multi-role authentication, RESTful APIs for products, orders and users, and an admin dashboard for inventory management.</p>
+          <dl class="fact-list">
+            <div><dt>Developer</dt><dd><a class="text-link" href="/about">Utsav Kalathiya</a></dd></div>
+            <div><dt>Type</dt><dd>Full-stack web application</dd></div>
+            <div><dt>Language</dt><dd>JavaScript</dd></div>
+            <div><dt>Links</dt><dd>Not publicly available yet</dd></div>
+          </dl>
+        </section>
+
+        <section class="content-section">
+          <h2 class="h3">Features</h2>
+          <ul class="bullet-list">
+            <li>Multi-role authentication with JWT and Bcrypt</li>
+            <li>RESTful APIs for products, orders and users</li>
+            <li>Admin dashboard with CRUD and inventory management</li>
+            <li>Responsive UI built with Tailwind CSS</li>
+          </ul>
+        </section>
+
+        <section class="content-section">
+          <h2 class="h3">Technology</h2>
+          <div class="skill-group">
+            <h3 class="h5">Frontend</h3>
+            <ul class="tag-list"><li>React.js</li><li>Tailwind CSS</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3 class="h5">Backend</h3>
+            <ul class="tag-list"><li>Node.js</li><li>Express.js</li><li>MongoDB</li><li>JWT</li><li>Bcrypt</li></ul>
+          </div>
+        </section>
+
+        <section class="content-section">
+          <h2 class="h3">Links</h2>
+          <p>The source code and live demo for this project are not publicly linked yet. <a class="text-link" href="/contact">Get in touch</a> to ask about it.</p>
+        </section>
+
+        <section class="content-section">
+          <h2 class="h3">More projects by Utsav Kalathiya</h2>
+          <ul class="bullet-list">
+            <li><a class="text-link" href="/projects/house-rent-sell">Real Estate Marketplace (House Rent &amp; Sell)</a></li>
+            <li><a class="text-link" href="/projects/job-portal">Job Portal Application</a></li>
+            <li><a class="text-link" href="/projects/e-commerce-full-stack">E-Commerce Full Stack Website</a></li>
+            <li><a class="text-link" href="/projects/splitwise-react-native">Splitwise – React Native App</a></li>
+            <li><a class="text-link" href="/projects/gym-website">GYM Website</a></li>
+            <li><a class="text-link" href="/projects/event-planner">Event Planner Website</a></li>
+          </ul>
+          <p><a class="text-link" href="/projects">All projects</a> · <a class="text-link" href="/about">About Utsav Kalathiya</a></p>
+        </section>
+
+      </article>
+
+      <footer class="site-footer">
+
+        <div class="site-footer-brand">
+          <p class="site-footer-name">Utsav Kalathiya</p>
+          <p>Full Stack Developer · Surat, Gujarat, India</p>
+        </div>
+
+        <nav class="site-footer-nav" aria-label="Footer">
+          <ul class="site-footer-links">
+            <li><a href="/about">About</a></li>
+            <li><a href="/experience">Experience</a></li>
+            <li><a href="/skills">Skills</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/resume">Resume</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <ul class="site-footer-social">
+          <li><a href="https://github.com/utsavkalathiya1602" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-github" aria-hidden="true"></ion-icon>GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/utsavkalathiya1602/" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon>LinkedIn</a></li>
+          <li><a href="mailto:utsavkalathiya0001@gmail.com"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon>Email</a></li>
+          <li><a href="/"><ion-icon name="globe-outline" aria-hidden="true"></ion-icon>Portfolio</a></li>
+        </ul>
+
+        <p class="site-footer-copy">&copy; <span data-year>2026</span> Utsav Kalathiya. All rights reserved.</p>
+
+      </footer>
+
+    </div>
+
+  </main>
+
+  <script src="/assets/js/script.js?v=2"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

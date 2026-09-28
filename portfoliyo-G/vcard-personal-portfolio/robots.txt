@@ -1,0 +1,6 @@
+# Public portfolio of Utsav Kalathiya: all crawlers, including search and
+# AI search crawlers (Googlebot, Bingbot, OAI-SearchBot), may crawl everything.
+User-agent: *
+Allow: /
+
+Sitemap: https://utsavkalathiya.vercel.app/sitemap.xml
