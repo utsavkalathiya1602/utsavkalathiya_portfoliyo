@@ -12,7 +12,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   SITE, PERSON_ID, WEBSITE_ID, person, aboutParagraphs, experience, education,
-  skillGroups, projects, keyProjectSlugs,
+  skillGroups, projects, keyProjectSlugs, resumeSummary, spokenLanguages,
 } from "./site-data.mjs";
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), "..", "portfoliyo-G", "vcard-personal-portfolio");
@@ -47,6 +47,8 @@ const personNode = () => ({
     addressCountry: person.countryCode,
   },
   alumniOf: { "@type": "CollegeOrUniversity", name: person.alumniOf },
+  worksFor: { "@type": "Organization", name: person.worksFor },
+  knowsLanguage: person.knowsLanguage,
   knowsAbout: person.knowsAbout,
   sameAs: [person.github, person.linkedin],
 });
@@ -304,9 +306,11 @@ const experienceTimeline = (headingTag = "h3") => `
 ${experience.map((e) => `
             <li class="timeline-item">
               <${headingTag} class="h4 timeline-item-title">${esc(e.role)} – ${esc(e.company)}</${headingTag}>
-              <span>${esc(e.dates)}</span>
+              <span>${esc(e.dates)}${e.companyNote ? ` · ${esc(e.companyNote)}` : ""}</span>
               <div class="timeline-text">
-${e.items.map((it) => `                <p>${it.title ? `<strong>${esc(it.title)}:</strong> ` : ""}${esc(it.text)}</p>`).join("\n")}
+                <ul class="bullet-list">
+${e.items.map((it) => `                  <li>${it.title ? `<strong>${esc(it.title)}:</strong> ` : ""}${esc(it.text)}</li>`).join("\n")}
+                </ul>
 ${e.relatedProject ? `                <p>Related project: <a class="text-link" href="${projectUrl(bySlug(e.relatedProject))}">${esc(bySlug(e.relatedProject).name)}</a></p>` : ""}
               </div>
             </li>`).join("\n")}
@@ -358,7 +362,7 @@ function aboutPage() {
   const url = "/about";
   const title = "About Utsav Kalathiya | Full Stack Developer from Surat, India";
   const description =
-    "Utsav Kalathiya is a Full Stack Developer from Surat, Gujarat, India who builds web and mobile apps with React.js, Node.js, Express.js and MongoDB.";
+    "Utsav Kalathiya is a Full Stack Developer from Surat, Gujarat, India, currently at Elpiora, who builds web and mobile apps with React.js, Node.js, Express.js and MongoDB.";
   const trail = [["Home", "/"], ["About", url]];
   const graph = [
     webPageNode("ProfilePage", url, title, description, {
@@ -374,7 +378,7 @@ function aboutPage() {
 
   const body = `
         <section class="about-text content-section">
-          <p class="intro-lead">I'm ${person.name}, a ${person.jobTitle} based in ${person.location}. I build web applications with React.js, Node.js, Express.js and MongoDB.</p>
+          <p class="intro-lead">I'm ${person.name}, a ${person.jobTitle} based in ${person.location}, currently working remotely at ${person.worksFor}. I build web applications with React.js, Node.js, Express.js and MongoDB.</p>
 ${aboutParagraphs.map((p) => `          <p>${esc(p)}</p>`).join("\n")}
         </section>
 
@@ -383,9 +387,11 @@ ${aboutParagraphs.map((p) => `          <p>${esc(p)}</p>`).join("\n")}
           <dl class="fact-list">
             <div><dt>Name</dt><dd>${person.name}</dd></div>
             <div><dt>Role</dt><dd>${person.jobTitle}</dd></div>
+            <div><dt>Currently</dt><dd>${esc(experience.find((e) => e.current).role)} at ${person.worksFor}</dd></div>
             <div><dt>Based in</dt><dd>${person.location}</dd></div>
             <div><dt>Core stack</dt><dd>${person.coreStack.join(", ")}</dd></div>
             <div><dt>Also works with</dt><dd>Angular, React Native, MySQL, Tailwind CSS</dd></div>
+            <div><dt>Languages</dt><dd>${spokenLanguages.map(([l]) => l).join(", ")}</dd></div>
             <div><dt>Official website</dt><dd><a class="text-link" href="/">utsavkalathiya.vercel.app</a></dd></div>
             <div><dt>GitHub</dt><dd>${ext(person.github, "github.com/utsavkalathiya1602", "text-link")}</dd></div>
             <div><dt>LinkedIn</dt><dd>${ext(person.linkedin, "linkedin.com/in/utsavkalathiya1602", "text-link")}</dd></div>
@@ -433,7 +439,7 @@ function experiencePage() {
   const url = "/experience";
   const title = "Experience | Utsav Kalathiya, Full Stack Developer";
   const description =
-    "Work experience of Utsav Kalathiya: Full Stack Developer at WRT InfoTech (Angular, React.js, React Native) and Full Stack Developer Intern at NIQOX (MERN stack).";
+    "Work experience of Utsav Kalathiya: remote Full Stack Developer at Elpiora, Full Stack Developer at WRT InfoTech (Angular, React.js, React Native) and intern at NIQOX (MERN stack).";
   const trail = [["Home", "/"], ["Experience", url]];
   const graph = [
     webPageNode("WebPage", url, title, description, { about: personRef, dateModified: TODAY }),
@@ -484,6 +490,11 @@ ${skillGroups.map((g) => `          <div class="skill-group">
             ${tags(g.skills)}
             <p class="skill-note">${esc(g.note)}</p>
           </div>`).join("\n\n")}
+
+          <div class="skill-group">
+            <h2 class="h4">Spoken languages</h2>
+            ${tags(spokenLanguages.map(([l, level]) => `${l} — ${level.toLowerCase()}`))}
+          </div>
         </section>
 
         <section class="content-section">
@@ -628,7 +639,7 @@ function resumePage() {
   const url = "/resume";
   const title = "Resume | Utsav Kalathiya, Full Stack Developer";
   const description =
-    "Resume of Utsav Kalathiya, Full Stack Developer from Surat, India: experience at WRT InfoTech and NIQOX, key projects, skills and education.";
+    "Resume of Utsav Kalathiya, Full Stack Developer from Surat, India: experience at Elpiora, WRT InfoTech and NIQOX, key projects, skills and education.";
   const trail = [["Home", "/"], ["Resume", url]];
   const graph = [
     webPageNode("WebPage", url, title, description, { about: personRef, mainEntity: personRef, dateModified: TODAY }),
@@ -647,7 +658,7 @@ function resumePage() {
 
         <section class="content-section">
           <h2 class="h3">Summary</h2>
-${aboutParagraphs.map((p) => `          <p>${esc(p)}</p>`).join("\n")}
+          <p>${esc(resumeSummary)}</p>
         </section>
 
         <section class="timeline">
@@ -677,6 +688,7 @@ ${key.map((p) => `
         <section class="content-section">
           <h2 class="h3">Skills</h2>
 ${skillGroups.filter((g) => !g.name.startsWith("Libraries")).map((g) => `          <p><strong>${esc(g.name)}:</strong> ${esc(g.skills.join(", "))}</p>`).join("\n")}
+          <p><strong>Spoken languages:</strong> ${esc(spokenLanguages.map(([l, level]) => `${l} (${level.toLowerCase()})`).join(", "))}</p>
         </section>
 
         <section class="timeline">

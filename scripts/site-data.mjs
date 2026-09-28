@@ -1,8 +1,8 @@
 // Single source of truth for the generated pages, structured data and sitemap.
 //
-// Every fact here comes from the existing portfolio (index.html) or from the
-// dependency lists of the linked GitHub repositories. Do not add claims that
-// are not backed by one of those sources.
+// Every fact here comes from the existing portfolio (index.html), the resume
+// PDF (Sep 2026), or the dependency lists of the linked GitHub repositories.
+// Do not add claims that are not backed by one of those sources.
 
 export const SITE = "https://utsavkalathiya.vercel.app";
 export const PERSON_ID = `${SITE}/#person`;
@@ -41,39 +41,70 @@ export const person = {
     "Tailwind CSS",
   ],
   alumniOf: "Sutex Bank College of Computer Application",
+  // current employer (resume: May 2026 – Present)
+  worksFor: "Elpiora",
+  // spoken languages from the resume, as BCP 47 codes for schema.org knowsLanguage
+  knowsLanguage: ["en", "hi", "gu"],
 };
+
+// Professional summary from the resume PDF.
+export const resumeSummary =
+  "Full Stack Developer with hands-on experience building, scaling, and modernizing web and mobile applications across MERN and MEAN stacks in remote, product-based, and client-facing environments. Proficient in upgrading legacy enterprise architectures (Angular v11 to v19), building cross-platform React Native applications, and developing secure RESTful APIs. Adept in MongoDB, MySQL, and PostgreSQL database design with experience integrating AI components like TensorFlow.js.";
+
+export const spokenLanguages = [
+  ["English", "Working proficiency"],
+  ["Hindi", "Full professional"],
+  ["Gujarati", "Full professional"],
+];
 
 // Existing "About me" copy from index.html.
 export const aboutParagraphs = [
   "I'm a Full Stack Developer with hands-on experience across the MERN and MEAN stacks — including upgrading a legacy Angular application from v11 to v19, building and maintaining React.js and React Native apps, and integrating RESTful APIs end-to-end. I'm comfortable owning frontend features from UI redesign to bug fixing, across both web and mobile platforms.",
-  "I have a strong foundation in database design across MongoDB, MySQL, and PostgreSQL, with a track record of delivering clean, maintainable code on real client projects at WRT InfoTech and NIQOX. I'm a quick learner who enjoys collaborative, fast-paced development environments.",
+  "I have a strong foundation in database design across MongoDB, MySQL, and PostgreSQL, with a track record of delivering clean, maintainable code on real projects at Elpiora, WRT InfoTech and NIQOX. I'm a quick learner who enjoys collaborative, fast-paced development environments.",
 ];
 
 export const experience = [
   {
+    role: "Full Stack Developer (Remote)",
+    company: "Elpiora",
+    companyNote: "Product-based startup",
+    dates: "May 2026 – Present",
+    current: true,
+    items: [
+      { title: null, text: "Architect and develop core end-to-end full-stack features using React.js, Node.js, Express.js, and MongoDB in a remote Agile environment." },
+      { title: null, text: "Design scalable RESTful APIs and optimize MongoDB query performance to improve server response times across high-traffic product features." },
+      { title: null, text: "Modernize UI/UX components using Tailwind CSS and React.js to improve front-end rendering efficiency and responsiveness across platforms." },
+      { title: null, text: "Collaborate asynchronously with cross-functional remote teams, including product managers and designers." },
+    ],
+  },
+  {
     role: "Full Stack Developer",
     company: "WRT InfoTech",
+    companyNote: "Surat, Gujarat",
     dates: "Nov 2025 – Apr 2026",
     items: [
       {
         title: "Project Ciphus (Angular)",
-        text: "Upgraded a legacy Angular app from v11 to v19, redesigned key UI screens, integrated backend REST APIs, and resolved functional and UI bugs.",
+        text: "Modernized a legacy Angular application by upgrading it from version 11 to 19 and redesigning front-end user interfaces.",
       },
       {
         title: "Project FamePilot (React & React Native)",
-        text: "Developed and maintained the web app (React.js) and mobile app (React Native), integrated RESTful APIs, built new UI features, and debugged cross-platform issues.",
+        text: "Managed end-to-end web (React.js) and cross-platform mobile app (React Native) development, upgrading both codebases to the latest major versions.",
+      },
+      {
+        title: null,
+        text: "Integrated backend RESTful APIs, resolved critical front-end and back-end production bugs, and ensured consistent UI performance across mobile and web platforms.",
       },
     ],
   },
   {
     role: "Full Stack Developer Intern",
     company: "NIQOX",
+    companyNote: "Surat, Gujarat",
     dates: "Jul 2025 – Sep 2025",
     items: [
-      {
-        title: null,
-        text: "Applied MERN stack development through real-world project work. Built a Job Portal web application with user authentication, role-based access control, and full CRUD functionality using Node.js, Express.js, and MongoDB.",
-      },
+      { title: null, text: "Built a full-featured Job Portal web application using the MERN stack (MongoDB, Express.js, React.js, Node.js) in a production-style workflow." },
+      { title: null, text: "Implemented user authentication, secure session handling, and full CRUD API functionality for candidate applications and job listings." },
     ],
     relatedProject: "job-portal",
   },
@@ -84,7 +115,7 @@ export const education = [
     title: "Master of Computer Applications (MCA) – Online",
     school: "Manipal University Jaipur",
     dates: "2025 – Present",
-    text: "Pursuing MCA online at Manipal University Jaipur to deepen expertise in advanced software development, algorithms, and computer science fundamentals.",
+    text: "Pursuing MCA online at Manipal University Jaipur to deepen expertise in advanced software development, algorithms, and computer science fundamentals while working full-time.",
   },
   {
     title: "Bachelor of Computer Applications (BCA)",
@@ -104,18 +135,18 @@ export const education = [
 export const skillGroups = [
   {
     name: "Frontend",
-    skills: ["React.js", "Angular", "HTML", "CSS", "Tailwind CSS", "Bootstrap", "React Router"],
+    skills: ["React.js", "Angular (v11–v19)", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap", "React Router"],
     note: "React.js across most projects; Angular through the v11 → v19 upgrade of Project Ciphus at WRT InfoTech.",
   },
   {
     name: "Backend",
-    skills: ["Node.js", "Express.js", "RESTful APIs", "JWT authentication", "Role-based access control"],
-    note: "Every full-stack project here pairs a React frontend with a Node.js and Express.js API.",
+    skills: ["Node.js", "Express.js", "RESTful APIs", "JWT authentication", "OAuth 2.0", "Role-based access control"],
+    note: "Every full-stack project here pairs a React frontend with a Node.js and Express.js API; Google OAuth 2.0 sign-in in the Real Estate Marketplace.",
   },
   {
     name: "Database",
-    skills: ["MongoDB", "Mongoose", "MySQL", "PostgreSQL", "Prisma"],
-    note: "MongoDB with Mongoose in the MERN projects; Prisma in the Splitwise app backend.",
+    skills: ["MongoDB", "Mongoose", "MySQL", "PostgreSQL", "Prisma", "Schema design", "Query optimization"],
+    note: "MongoDB with Mongoose in the MERN projects, including MongoDB query optimization at Elpiora; Prisma in the Splitwise app backend.",
   },
   {
     name: "Mobile",
@@ -124,7 +155,7 @@ export const skillGroups = [
   },
   {
     name: "Languages",
-    skills: ["JavaScript", "TypeScript"],
+    skills: ["JavaScript (ES6+)", "TypeScript"],
     note: "TypeScript in Angular work and in the Splitwise React Native app.",
   },
   {
@@ -133,9 +164,9 @@ export const skillGroups = [
     note: "See each project page for where these are used.",
   },
   {
-    name: "Tools & deployment",
-    skills: ["Git", "GitHub", "Vercel", "Netlify", "Render"],
-    note: "Live demos are deployed on Vercel, Netlify and Render.",
+    name: "Tools, workflow & deployment",
+    skills: ["Git", "GitHub", "Postman", "Agile / Scrum", "Vercel", "Netlify", "Render"],
+    note: "Remote Agile work at Elpiora; live demos are deployed on Vercel, Netlify and Render.",
   },
 ];
 
@@ -162,9 +193,9 @@ export const projects = [
     summary:
       "A responsive full-stack property platform for renting and selling houses, with location-based search and AI image validation.",
     features: [
-      "Login with JWT authentication and Google OAuth",
-      "Leaflet-based location search for properties",
-      "AI image validation with TensorFlow.js",
+      "Login with JWT authentication and Google OAuth 2.0",
+      "Leaflet-based map location search for properties",
+      "AI image validation with TensorFlow.js that checks property images automatically during upload",
       "MongoDB schemas designed for efficient filtering and data storage",
       "Responsive UI built with React.js and Tailwind CSS",
     ],
@@ -183,9 +214,9 @@ export const projects = [
     summary:
       "An e-commerce platform for farmers with multi-role authentication, RESTful APIs for products, orders and users, and an admin dashboard for inventory management.",
     features: [
-      "Multi-role authentication with JWT and Bcrypt",
-      "RESTful APIs for products, orders and users",
-      "Admin dashboard with CRUD and inventory management",
+      "Multi-role authentication with JWT and Bcrypt for consumers, sellers and administrators",
+      "Full CRUD RESTful APIs for products, orders and users",
+      "Admin inventory dashboard for real-time stock and order management",
       "Responsive UI built with Tailwind CSS",
     ],
     frontend: ["React.js", "Tailwind CSS"],
@@ -206,7 +237,8 @@ export const projects = [
     features: [
       "Role-based authentication (RBAC) with separate workflows for job seekers and companies",
       "RESTful APIs for job postings, applications and user profile management",
-      "Full CRUD functionality with Node.js, Express.js and MongoDB",
+      "User authentication with secure session handling",
+      "Full CRUD APIs for candidate applications and job listings with Node.js, Express.js and MongoDB",
       "Responsive frontend built with React.js and Tailwind CSS",
     ],
     frontend: ["React.js", "React Router", "Tailwind CSS", "Axios", "Framer Motion", "Quill editor", "Swiper"],
