@@ -17,6 +17,9 @@ import {
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), "..", "portfoliyo-G", "vcard-personal-portfolio");
 const TODAY = new Date().toISOString().slice(0, 10);
+// schema.org dateModified must be a full ISO 8601 DateTime (Search Console
+// flags a bare date); midnight India Standard Time on the build date
+const MODIFIED = `${TODAY}T00:00:00+05:30`;
 const YEAR = new Date().getFullYear();
 
 const esc = (s) => String(s)
@@ -371,7 +374,7 @@ function aboutPage() {
       mainEntity: personRef,
       about: personRef,
       primaryImageOfPage: { "@type": "ImageObject", url: abs(person.image) },
-      dateModified: TODAY,
+      dateModified: MODIFIED,
     }),
     personNode(),
     breadcrumbNode(url, trail),
@@ -444,7 +447,7 @@ function experiencePage() {
     "Work experience of Utsav Kalathiya: remote Full Stack Developer at Elpiora, Full Stack Developer at WRT InfoTech (Angular, React.js, React Native) and intern at NIQOX (MERN stack).";
   const trail = [["Home", "/"], ["Experience", url]];
   const graph = [
-    webPageNode("WebPage", url, title, description, { about: personRef, dateModified: TODAY }),
+    webPageNode("WebPage", url, title, description, { about: personRef, dateModified: MODIFIED }),
     breadcrumbNode(url, trail),
   ];
   const body = `
@@ -478,7 +481,7 @@ function skillsPage() {
     "Technologies Utsav Kalathiya works with: React.js, Angular, Node.js, Express.js, MongoDB, MySQL, PostgreSQL, React Native, JavaScript and TypeScript.";
   const trail = [["Home", "/"], ["Skills", url]];
   const graph = [
-    webPageNode("WebPage", url, title, description, { about: personRef, dateModified: TODAY }),
+    webPageNode("WebPage", url, title, description, { about: personRef, dateModified: MODIFIED }),
     breadcrumbNode(url, trail),
   ];
   const body = `
@@ -521,7 +524,7 @@ function projectsIndexPage() {
           "@type": "ListItem", position: i + 1, url: abs(projectUrl(p)), name: p.name,
         })),
       },
-      dateModified: TODAY,
+      dateModified: MODIFIED,
     }),
     breadcrumbNode(url, trail),
   ];
@@ -573,7 +576,7 @@ function projectPage(p) {
     ...(p.live ? { sameAs: [p.live] } : {}),
   };
   const graph = [
-    webPageNode("WebPage", url, title, description, { mainEntity: { "@id": work["@id"] }, author: personRef, dateModified: TODAY }),
+    webPageNode("WebPage", url, title, description, { mainEntity: { "@id": work["@id"] }, author: personRef, dateModified: MODIFIED }),
     work,
     breadcrumbNode(url, trail),
   ];
@@ -644,7 +647,7 @@ function resumePage() {
     "Resume of Utsav Kalathiya, Full Stack Developer from Surat, India: experience at Elpiora, WRT InfoTech and NIQOX, key projects, skills and education.";
   const trail = [["Home", "/"], ["Resume", url]];
   const graph = [
-    webPageNode("WebPage", url, title, description, { about: personRef, mainEntity: personRef, dateModified: TODAY }),
+    webPageNode("WebPage", url, title, description, { about: personRef, mainEntity: personRef, dateModified: MODIFIED }),
     breadcrumbNode(url, trail),
   ];
   const key = keyProjectSlugs.map(bySlug);
@@ -807,7 +810,7 @@ function syncHomepage() {
       isPartOf: websiteRef,
       mainEntity: personRef,
       about: personRef,
-      dateModified: TODAY,
+      dateModified: MODIFIED,
     },
     personNode(),
   ];
