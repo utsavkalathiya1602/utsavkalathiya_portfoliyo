@@ -12,7 +12,7 @@ export const person = {
   name: "Utsav Kalathiya",
   jobTitle: "Full Stack Developer",
   tagline:
-    "Full Stack Developer specializing in React.js, Node.js, Express.js, MongoDB and modern web application development.",
+    "Full Stack Developer specializing in React.js, Node.js, Express.js, MongoDB and MERN stack development.",
   locality: "Surat",
   region: "Gujarat",
   country: "India",
@@ -39,6 +39,9 @@ export const person = {
     "React Native",
     "RESTful APIs",
     "Tailwind CSS",
+    "MERN Stack",
+    "Full Stack Development",
+    "Web Development",
   ],
   alumniOf: "Sutex Bank College of Computer Application",
   // current employer (resume: May 2026 – Present)

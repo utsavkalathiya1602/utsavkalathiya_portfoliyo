@@ -95,7 +95,7 @@ const head = ({ url, title, description, ogType = "website", noindex = false, gr
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
-${noindex ? `  <meta name="robots" content="noindex, follow">\n` : `  <link rel="canonical" href="${abs(url)}">\n`}  <meta name="author" content="${person.name}">
+${noindex ? `  <meta name="robots" content="noindex, follow">\n` : `  <meta name="robots" content="index, follow">\n  <link rel="canonical" href="${abs(url)}">\n`}  <meta name="author" content="${person.name}">
   <meta name="theme-color" content="#121212">
 
   <meta property="og:site_name" content="${person.name}">
@@ -786,19 +786,20 @@ function notFoundPage() {
 function syncHomepage() {
   const file = join(OUT, "index.html");
   let html = readFileSync(file, "utf8");
-  const title = "Utsav Kalathiya | Full Stack Developer | React.js, Node.js & MERN";
+  const title = "Utsav Kalathiya | Full Stack Developer | React, Node.js & MERN";
   const graph = [
     {
       "@type": "WebSite",
       "@id": WEBSITE_ID,
       url: `${SITE}/`,
       name: person.name,
-      description: person.tagline,
+      description: `Official portfolio of ${person.name}, ${person.jobTitle}.`,
       inLanguage: "en",
       publisher: personRef,
+      about: personRef,
     },
     {
-      "@type": "WebPage",
+      "@type": "ProfilePage",
       "@id": `${SITE}/#webpage`,
       url: `${SITE}/`,
       name: title,
