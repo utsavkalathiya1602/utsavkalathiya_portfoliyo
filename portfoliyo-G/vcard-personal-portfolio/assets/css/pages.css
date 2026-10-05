@@ -10,6 +10,21 @@
 /* width/height attributes reserve space (no layout shift); style.css resizes by width */
 .avatar-box img { height: auto; }
 
+/* circular profile photo: the frame is a circle the photo fills, with a thin
+   accent ring (replaces the template's grey rounded-square tile) */
+.avatar-box {
+  flex-shrink: 0;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--text-gradient-yellow);
+  box-shadow: var(--shadow-2);
+}
+
+.avatar-box img {
+  border-radius: 50%;
+  background: var(--eerie-black-2);
+}
+
 
 
 /**

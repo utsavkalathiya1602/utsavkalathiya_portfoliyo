@@ -120,7 +120,7 @@ ${ogType === "profile" ? `  <meta property="profile:first_name" content="Utsav">
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 
   <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=2">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=3">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -134,7 +134,7 @@ const sidebar = () => `
       <div class="sidebar-info">
 
         <figure class="avatar-box">
-          <img src="${person.image}" alt="${person.imageAlt}" width="80" height="78">
+          <img src="${person.avatar}" alt="${person.imageAlt}" width="80" height="80" fetchpriority="high">
         </figure>
 
         <div class="info-content">

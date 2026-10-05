@@ -21,7 +21,9 @@ export const person = {
   email: "utsavkalathiya0001@gmail.com",
   github: "https://github.com/utsavkalathiya1602",
   linkedin: "https://www.linkedin.com/in/utsavkalathiya1602/",
-  image: "/assets/images/utsav-kalathiya-full-stack-developer.png",
+  // sidebar photo (small) and the larger one used as the Person image for search engines
+  avatar: "/assets/images/utsav-kalathiya-full-stack-developer.webp",
+  image: "/assets/images/utsav-kalathiya-full-stack-developer-720.webp",
   imageAlt: "Utsav Kalathiya - Full Stack Developer",
   ogImage: "/assets/images/og-image.png",
   // shown as core stack everywhere; all appear in the existing portfolio or repos
