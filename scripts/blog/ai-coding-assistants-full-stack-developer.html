@@ -1,0 +1,37 @@
+<p>AI coding assistants have gone from novelty to a normal part of the developer toolbox. They autocomplete whole functions, explain unfamiliar code and draft tests in seconds. The useful question is no longer <em>whether</em> to use them, but <em>how</em> to use them without slowly becoming a worse engineer.</p>
+
+<p>Working across React, Node.js, Express, MongoDB and Angular, I've settled on a simple split: some work I happily hand to an assistant, and some work I always keep for myself. Here's that split, and the rules I follow so the speed never costs quality.</p>
+
+<h2>What I'm happy to delegate</h2>
+<ul>
+  <li><strong>Boilerplate.</strong> An Express route skeleton, a Mongoose schema from a list of fields, a React form with validation. The shape is predictable and easy to check.</li>
+  <li><strong>First drafts of tests.</strong> Asking for test cases often surfaces edge cases I hadn't listed. I still read every test and make sure it fails when the code is broken.</li>
+  <li><strong>Explaining unfamiliar code.</strong> Dropped into an old module or a library's internals, a quick "what does this do?" gets me oriented much faster than reading cold.</li>
+  <li><strong>Mechanical transformations.</strong> Converting data between formats, writing a regex, renaming across a file, or tidying leftovers after a framework migration.</li>
+  <li><strong>Documentation drafts.</strong> README sections, JSDoc comments, a first pass at a pull-request description that I then correct.</li>
+</ul>
+
+<h2>What I always keep for myself</h2>
+<ul>
+  <li><strong>Architecture and data modelling.</strong> How collections relate, where state lives, how services talk to each other. These decisions are expensive to undo, and they depend on context an assistant doesn't have.</li>
+  <li><strong>Security-sensitive code.</strong> Authentication, access control, anything touching tokens or payments. Generated code often <em>looks</em> right while missing exactly the checks that matter, such as verifying that a user owns the record they're editing. I wrote about that pattern in <a href="/blog/role-based-access-control-mern-job-portal">role-based access control in a MERN job portal</a>.</li>
+  <li><strong>Root-cause debugging.</strong> An assistant can suggest likely causes, but understanding <em>why</em> a production bug happened, and making sure it can't come back, is the core of the job.</li>
+  <li><strong>The final review.</strong> My name is on the commit. Whatever I merge, I own.</li>
+</ul>
+
+<h2>My rules for using AI assistants well</h2>
+<ol>
+  <li><strong>Never merge code you can't explain.</strong> If I couldn't walk a teammate through every line in a code review, it isn't ready, however good it looks.</li>
+  <li><strong>Review it like a junior developer's pull request.</strong> Generated code is a confident first draft: read it, run it, test the unhappy paths.</li>
+  <li><strong>Check APIs against the official docs.</strong> Assistants sometimes suggest functions that don't exist, or syntax from an older version of a framework. With fast-moving tools like Angular or React, always confirm against current documentation.</li>
+  <li><strong>Keep secrets and private code out of unapproved tools.</strong> API keys, customer data and company code should only go into tools your team has explicitly approved.</li>
+  <li><strong>Ask for tests, then read them.</strong> Tests are the cheapest way to check that generated code does what you meant, not just what you typed.</li>
+  <li><strong>Keep practising the fundamentals.</strong> I still write tricky logic by hand regularly. Skills you never use fade, and you need them most exactly when the assistant is wrong.</li>
+</ol>
+
+<h2>What this means for developers' careers</h2>
+<p>When typing code gets cheaper, the valuable skills move up a level: understanding systems end to end, making good trade-offs, spotting what's missing, and communicating clearly with designers, product managers and other engineers. Those were always the skills that separated good developers from great ones. AI just makes the difference more visible.</p>
+<p>For students and junior developers, my advice is to use AI to <em>learn faster</em>, not to <em>skip learning</em>. Ask it to explain, to quiz you, to review your code. Don't let it think for you before you've tried yourself. The developers who benefit most from these tools are the ones who could do the work without them.</p>
+
+<h2>Takeaway</h2>
+<p>Treat an AI assistant like a fast, tireless pair programmer that's sometimes confidently wrong. Delegate the predictable work, keep the decisions and the security-critical parts for yourself, and never ship anything you don't understand. Used that way, it makes you faster <em>and</em> better.</p>

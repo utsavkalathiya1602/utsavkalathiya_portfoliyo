@@ -1,0 +1,97 @@
+<p>"Continue with Google" removes one of the biggest drop-off points in any app: making up yet another password. In my <a href="/projects/house-rent-sell">Real Estate Marketplace</a> I added Google sign-in alongside normal email-and-password login, with one goal: once a user is signed in, the rest of the app shouldn't care <em>how</em> they signed in.</p>
+
+<p>The trick is to treat Google purely as a way to prove who someone is, then issue <strong>your own JWT</strong>, the same kind the email/password login issues. Here's the full flow, the code, and the hardening steps I'd recommend.</p>
+
+<h2>The flow at a glance</h2>
+<ol>
+  <li>The React app shows a "Continue with Google" button and gets a token from Google.</li>
+  <li>It sends that token to the Express API (<code>POST /auth/google-login</code>).</li>
+  <li>The API asks Google who the token belongs to.</li>
+  <li>The API finds or creates the matching user in MongoDB.</li>
+  <li>The API signs and returns its own JWT, exactly as the normal login does.</li>
+</ol>
+
+<h2>Frontend: the Google button</h2>
+<p>The <code>@react-oauth/google</code> package handles the Google popup. Wrap the app in <code>&lt;GoogleOAuthProvider clientId={...}&gt;</code>, then use the <code>useGoogleLogin</code> hook:</p>
+<pre><code class="language-jsx">import { useGoogleLogin } from '@react-oauth/google';
+
+const loginWithGoogle = useGoogleLogin({
+  onSuccess: async (tokenResponse) =&gt; {
+    const res = await API.post('/auth/google-login', {
+      accessToken: tokenResponse.access_token,
+    });
+    localStorage.setItem('token', res.data.token);
+    navigate(res.data.user.role === 'admin' ? '/admin-dashboard' : '/');
+  },
+  onError: () =&gt; setError('Google login failed'),
+});
+
+// &lt;button onClick={() =&gt; loginWithGoogle()}&gt;Continue with Google&lt;/button&gt;</code></pre>
+<p>A custom hook instead of Google's pre-styled button meant I could match the login page design exactly.</p>
+
+<h2>Backend: verify, find or create, issue a JWT</h2>
+<p>On the server, <code>google-auth-library</code> calls Google's <em>userinfo</em> endpoint with the access token to get the user's profile:</p>
+<pre><code class="language-js">import { OAuth2Client } from 'google-auth-library';
+import jwt from 'jsonwebtoken';
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+router.post('/google-login', async (req, res) =&gt; {
+  try {
+    const { accessToken } = req.body;
+    if (!accessToken) return res.status(400).json({ error: 'No access token provided' });
+
+    client.setCredentials({ access_token: accessToken });
+    const { data } = await client.request({
+      url: 'https://www.googleapis.com/oauth2/v3/userinfo',
+    });
+    const { sub: googleId, email, name, picture: avatar } = data;
+
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = await User.create({ name, email, googleId, avatar, isOAuthUser: true, role: 'user' });
+    } else if (!user.googleId) {
+      user.googleId = googleId; // link Google to an existing email/password account
+      await user.save();
+    }
+
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
+      expiresIn: '1d',
+    });
+    res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to authenticate with Google' });
+  }
+});</code></pre>
+
+<h3>Why issue your own JWT?</h3>
+<p>Because now every protected route works the same way for every user. The auth middleware only ever verifies <em>your</em> token and reads <code>id</code> and <code>role</code> from it. Google is involved once, at sign-in, and never again. Adding another provider later (GitHub, Apple) means writing one more route that ends in the same <code>jwt.sign(...)</code>.</p>
+
+<h3>Account linking</h3>
+<p>If someone registered with email and password and later clicks "Continue with Google" with the same address, they land in the <em>same</em> account, with their Google ID added to it. Without this, people end up with two accounts and "where did my listings go?" support messages.</p>
+
+<h2>Hardening it</h2>
+<p>The flow above works, and these are the improvements I'd make to bring it to production standard.</p>
+
+<h3>1. Prefer verifying an ID token</h3>
+<p>An OAuth <em>access token</em> is meant for calling Google APIs, and it isn't tied to <em>your</em> app. The userinfo endpoint will accept a valid token that was issued to any application. Google's recommended way to sign users in is to verify an <strong>ID token</strong>, which is signed by Google and carries your client ID as its audience:</p>
+<pre><code class="language-js">// frontend: &lt;GoogleLogin onSuccess={({ credential }) =&gt; send(credential)} /&gt;
+const ticket = await client.verifyIdToken({
+  idToken: credential,
+  audience: process.env.GOOGLE_CLIENT_ID,
+});
+const { sub: googleId, email, email_verified, name, picture } = ticket.getPayload();</code></pre>
+<p>If you want to keep the custom button and the access-token flow, at least confirm the token was issued for your app before trusting it. <code>client.getTokenInfo(accessToken)</code> returns its audience, which you can compare with your client ID.</p>
+
+<h3>2. Only link accounts by a verified email</h3>
+<p>Linking by email is only safe when Google says the address is verified. Check <code>email_verified</code> (present in both the ID token and the userinfo response) before attaching Google to an existing account.</p>
+
+<h3>3. Think about where the JWT lives</h3>
+<p>Storing the token in <code>localStorage</code> is simple and works well for a SPA, but any script that runs on the page (for example through an XSS bug) can read it. An <code>httpOnly</code>, <code>Secure</code>, <code>SameSite</code> cookie keeps the token out of JavaScript's reach. It means handling CSRF, but it's the safer default for production.</p>
+
+<h3>4. Keep secrets in the environment</h3>
+<p>The Google client ID can be public (it ships in the frontend), but the JWT secret must stay in an environment variable on the server and never be committed to the repository.</p>
+
+<h2>Takeaway</h2>
+<p>Use Google to answer one question, "who is this?", then hand the user your own JWT so the rest of your API stays simple and provider-agnostic. Verify ID tokens, link only verified emails, and store tokens carefully, and you get the convenience of social login without giving up control.</p>
+<p>The <a href="/projects/house-rent-sell">Real Estate Marketplace project page</a> has the live demo and source code.</p>

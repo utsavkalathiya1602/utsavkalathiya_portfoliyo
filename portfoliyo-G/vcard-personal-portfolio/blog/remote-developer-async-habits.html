@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remote Developer Habits for Async Teams | Utsav Kalathiya</title>
+  <meta name="description" content="Practical habits for remote developers in async teams: written decisions, reviewable pull requests, clear status updates, early blockers and healthy boundaries.">
+  <meta name="keywords" content="Remote work, Async communication, Agile, Career, Utsav Kalathiya">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits">
+  <meta name="author" content="Utsav Kalathiya">
+  <meta name="theme-color" content="#121212">
+
+  <meta property="og:site_name" content="Utsav Kalathiya">
+  <meta property="og:title" content="Remote Developer Habits for Async Teams | Utsav Kalathiya">
+  <meta property="og:description" content="Practical habits for remote developers in async teams: written decisions, reviewable pull requests, clear status updates, early blockers and healthy boundaries.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits">
+  <meta property="og:image" content="https://utsavkalathiya.vercel.app/assets/images/blog/remote-developer-async-habits.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Working Remotely as a Developer: Habits for Async Teams">
+  <meta property="og:locale" content="en_IN">
+  <meta property="article:published_time" content="2026-10-07T00:00:00+05:30">
+  <meta property="article:modified_time" content="2026-10-07T00:00:00+05:30">
+  <meta property="article:author" content="https://utsavkalathiya.vercel.app/about">
+  <meta property="article:tag" content="Remote work">
+  <meta property="article:tag" content="Async communication">
+  <meta property="article:tag" content="Agile">
+  <meta property="article:tag" content="Career">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Remote Developer Habits for Async Teams | Utsav Kalathiya">
+  <meta name="twitter:description" content="Practical habits for remote developers in async teams: written decisions, reviewable pull requests, clear status updates, early blockers and healthy boundaries.">
+  <meta name="twitter:image" content="https://utsavkalathiya.vercel.app/assets/images/blog/remote-developer-async-habits.jpg">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=6">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits#webpage",
+      "url": "https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits",
+      "name": "Remote Developer Habits for Async Teams | Utsav Kalathiya",
+      "description": "Practical habits for remote developers in async teams: written decisions, reviewable pull requests, clear status updates, early blockers and healthy boundaries.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://utsavkalathiya.vercel.app/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits#article"
+      },
+      "dateModified": "2026-10-07T00:00:00+05:30"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits#article",
+      "headline": "Working Remotely as a Developer: Habits That Make Async Teams Work",
+      "description": "Practical habits for remote developers in async teams: written decisions, reviewable pull requests, clear status updates, early blockers and healthy boundaries.",
+      "url": "https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits",
+      "mainEntityOfPage": {
+        "@id": "https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits#webpage"
+      },
+      "image": "https://utsavkalathiya.vercel.app/assets/images/blog/remote-developer-async-habits.jpg",
+      "datePublished": "2026-10-07T00:00:00+05:30",
+      "dateModified": "2026-10-07T00:00:00+05:30",
+      "author": {
+        "@type": "Person",
+        "@id": "https://utsavkalathiya.vercel.app/#person",
+        "name": "Utsav Kalathiya",
+        "url": "https://utsavkalathiya.vercel.app/about"
+      },
+      "publisher": {
+        "@id": "https://utsavkalathiya.vercel.app/#person"
+      },
+      "isPartOf": {
+        "@id": "https://utsavkalathiya.vercel.app/blog#blog"
+      },
+      "articleSection": "Remote Work",
+      "keywords": "Remote work, Async communication, Agile, Career",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://utsavkalathiya.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://utsavkalathiya.vercel.app/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Working Remotely as a Developer: Habits for Async Teams",
+          "item": "https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+
+</head>
+
+<body>
+
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <main>
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="/assets/images/utsav-kalathiya-full-stack-developer.webp" alt="Utsav Kalathiya - Full Stack Developer" width="80" height="80" fetchpriority="high">
+        </figure>
+
+        <div class="info-content">
+          <p class="name" title="Utsav Kalathiya"><a href="/" style="color: inherit;">Utsav Kalathiya</a></p>
+
+          <p class="title">Full Stack Developer</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn aria-expanded="false" aria-label="Show contacts">
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:utsavkalathiya0001@gmail.com" class="contact-link">utsavkalathiya0001@gmail.com</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="location-outline" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Surat, Gujarat, India</address>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-github" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+              <a href="https://github.com/utsavkalathiya1602" class="contact-link" target="_blank" rel="noopener noreferrer">github.com/utsavkalathiya1602</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">LinkedIn</p>
+              <a href="https://www.linkedin.com/in/utsavkalathiya1602/" class="contact-link" target="_blank" rel="noopener noreferrer">linkedin.com/in/utsavkalathiya1602</a>
+            </div>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+    <div class="main-content">
+
+      <nav class="navbar" aria-label="Main">
+
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="/about" class="navbar-link">About</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/resume" class="navbar-link">Resume</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/projects" class="navbar-link">Portfolio</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/blog" class="navbar-link active" aria-current="page">Blog</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/contact" class="navbar-link">Contact</a>
+          </li>
+        </ul>
+
+      </nav>
+
+      <article class="active" id="content">
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><span aria-current="page">Working Remotely as a Developer: Habits for Async Teams</span></li>
+          </ol>
+        </nav>
+
+        <header>
+          <h1 class="h2 article-title">Working Remotely as a Developer: Habits That Make Async Teams Work</h1>
+        </header>
+
+        <p class="post-meta">
+          By <a class="text-link" href="/about">Utsav Kalathiya</a> ·
+          <time datetime="2026-10-07">7 Oct 2026</time> ·
+          3 min read
+        </p>
+
+        <figure class="post-cover">
+          <img src="/assets/images/blog/remote-developer-async-habits.webp" alt="" width="960" height="504" fetchpriority="high">
+        </figure>
+
+        <div class="post-body">
+<p>Since May 2026 I've worked as a remote Full Stack Developer at Elpiora, a product-based startup, building features across React, Node.js, Express and MongoDB with product managers and designers who aren't in the same room, and often aren't online at the same time.</p>
+
+<p>Remote work is now a normal way for software teams to operate, and the hardest part isn't the code. It's making collaboration work when you can't tap someone on the shoulder. These are the habits that make asynchronous ("async") teamwork run smoothly, and that I'd recommend to any developer going remote.</p>
+
+<h2>1. If it isn't written down, it didn't happen</h2>
+<p>Decisions made in a private chat or a quick call disappear. Put them where the work lives: in the ticket, the pull request, or the design document. Anyone joining later, including you in three months, can then see <em>what</em> was decided and <em>why</em> without having to ask.</p>
+
+<h2>2. Write pull requests people can review without you</h2>
+<p>In an async team, your PR description is the conversation. A good one answers four questions:</p>
+<ul>
+  <li><strong>What</strong> changed, in one or two sentences.</li>
+  <li><strong>Why</strong>: the problem or ticket it solves.</li>
+  <li><strong>How to test it</strong>: the steps a reviewer can follow.</li>
+  <li><strong>What it looks like</strong>: screenshots or a short recording for any UI change.</li>
+</ul>
+<p>A reviewer in another time zone can then approve it in one pass instead of a day of back-and-forth questions.</p>
+
+<h2>3. Keep pull requests small</h2>
+<p>Small, focused PRs get reviewed quickly; huge ones sit in the queue and collect merge conflicts. Splitting a feature into a few reviewable steps (data model, then API, then UI) keeps work moving even when reviewers are only available for short windows.</p>
+
+<h2>4. Make status updates that unblock people</h2>
+<p>A useful async update fits in three lines:</p>
+<pre><code>Done:    order history API + tests
+Next:    connect it to the React order page
+Blocked: need the final empty-state design</code></pre>
+<p>The "blocked" line is the most important one. Raise blockers early and specifically, because in an async team a blocker you mention tomorrow can cost a full day.</p>
+
+<h2>5. Ask questions that can be answered in one reply</h2>
+<p>"Hey, got a minute?" followed by silence wastes a round-trip. Instead, send the whole question at once: the context, what you've already tried, and the specific decision you need. You'll usually get a complete answer in a single message.</p>
+
+<h2>6. Know when to switch to a call</h2>
+<p>Async is the default, not a rule. If a thread has gone back and forth two or three times without converging, a ten-minute call is faster. Afterwards, post a short written summary of what was decided, so the outcome is back in the written record.</p>
+
+<h2>7. Protect focus time and overlap time</h2>
+<p>Remote work makes deep focus easier, as long as you guard it. Block uninterrupted time for complex work, batch your message-checking, and keep a predictable window when teammates know they can reach you for quick questions.</p>
+
+<h2>8. Set boundaries</h2>
+<p>When your office is also your home, the workday can quietly expand. A clear start and end, notifications off after hours, and a proper break make you more productive over months, not just days.</p>
+
+<h2>Takeaway</h2>
+<p>Async work rewards developers who communicate clearly and proactively in writing. Write decisions down, make PRs easy to review, surface blockers early and ask complete questions. These habits make remote teams fast, and they make you a better teammate in any office, too.</p>
+<p>You can read more about my role at Elpiora on my <a href="/experience">experience page</a>.</p>
+        </div>
+
+        <section class="content-section post-footer">
+          <ul class="tag-list"><li>Remote work</li><li>Async communication</li><li>Agile</li><li>Career</li></ul>
+          <h2 class="h3">More articles</h2>
+          <ul class="bullet-list">
+            <li><a class="text-link" href="/blog/ai-coding-assistants-full-stack-developer">Using AI Coding Assistants: What to Delegate and What to Own</a></li>
+            <li><a class="text-link" href="/blog/bca-to-full-stack-developer-roadmap-india">From BCA to Full Stack Developer: A Practical Roadmap</a></li>
+            <li><a class="text-link" href="/blog/validate-image-uploads-tensorflow-js-mobilenet">Validating Image Uploads in the Browser with TensorFlow.js</a></li>
+            <li><a class="text-link" href="/blog/role-based-access-control-mern-job-portal">Role-Based Access Control in a MERN Job Portal</a></li>
+            <li><a class="text-link" href="/blog/google-sign-in-mern-jwt">Adding Google Sign-In to a MERN App with Your Own JWT</a></li>
+            <li><a class="text-link" href="/blog/upgrade-angular-11-to-19">Upgrading Angular from v11 to v19: A Step-by-Step Approach</a></li>
+          </ul>
+          <p><a class="text-link" href="/blog">All articles</a> · <a class="text-link" href="/about">About Utsav Kalathiya</a></p>
+        </section>
+
+      </article>
+
+      <footer class="site-footer">
+
+        <div class="site-footer-brand">
+          <p class="site-footer-name">Utsav Kalathiya</p>
+          <p>Full Stack Developer · Surat, Gujarat, India</p>
+        </div>
+
+        <nav class="site-footer-nav" aria-label="Footer">
+          <ul class="site-footer-links">
+            <li><a href="/about">About</a></li>
+            <li><a href="/experience">Experience</a></li>
+            <li><a href="/skills">Skills</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/resume">Resume</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <ul class="site-footer-social">
+          <li><a href="https://github.com/utsavkalathiya1602" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-github" aria-hidden="true"></ion-icon>GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/utsavkalathiya1602/" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon>LinkedIn</a></li>
+          <li><a href="mailto:utsavkalathiya0001@gmail.com"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon>Email</a></li>
+          <li><a href="/"><ion-icon name="globe-outline" aria-hidden="true"></ion-icon>Portfolio</a></li>
+        </ul>
+
+        <p class="site-footer-copy">&copy; <span data-year>2026</span> Utsav Kalathiya. All rights reserved.</p>
+
+      </footer>
+
+    </div>
+
+  </main>
+
+  <script src="/assets/js/script.js?v=4"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

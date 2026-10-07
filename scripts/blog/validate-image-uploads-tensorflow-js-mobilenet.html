@@ -1,0 +1,97 @@
+<p>Listings on my <a href="/projects/house-rent-sell">Real Estate Marketplace</a> live or die by their photos. When people add a property, they sometimes upload a selfie, a screenshot or a random image by mistake. I wanted a quick check that runs <em>before</em> the upload: does this picture actually look like a house, a room or a building?</p>
+
+<p>It turned out you don't need a backend ML service for that. A pre-trained image classifier running in the browser with <strong>TensorFlow.js</strong> does a good job, and the whole thing is about 80 lines of JavaScript. This post walks through how I built it, the trade-offs I chose, and what I would improve next time.</p>
+
+<h2>Why run the check in the browser?</h2>
+<ul>
+  <li><strong>Instant feedback.</strong> The user finds out a photo was rejected while they are still on the form, not after a slow upload.</li>
+  <li><strong>No ML server to run.</strong> The model runs on the user's device using WebGL, so there is no GPU bill and no extra API.</li>
+  <li><strong>Less wasted bandwidth.</strong> Rejected images never get uploaded to the image host (Cloudinary, in my case).</li>
+</ul>
+<p>The important caveat: a browser-side check is a <em>user-experience feature</em>, not a security control. Anyone can bypass client code, so the server still has to validate file type, size and content.</p>
+
+<h2>The model: MobileNet</h2>
+<p>MobileNet is a small, fast image-classification network trained on ImageNet, a dataset with 1,000 everyday object classes. The <code>@tensorflow-models/mobilenet</code> package wraps it so you can classify an image in one call. Install both packages:</p>
+<pre><code>npm install @tensorflow/tfjs @tensorflow-models/mobilenet</code></pre>
+
+<h2>Step 1: load the model once and reuse it</h2>
+<p>Downloading the model weights is the slowest part, so I load it lazily the first time it is needed and keep it in a module-level variable:</p>
+<pre><code class="language-js">import * as tf from '@tensorflow/tfjs';
+import * as mobilenet from '@tensorflow-models/mobilenet';
+
+let model = null;
+
+export const initializeModel = async () =&gt; {
+  if (model) return model;
+
+  await tf.ready(); // wait for the backend (usually WebGL in the browser)
+  model = await mobilenet.load({ version: 2, alpha: 1.0 });
+  return model;
+};</code></pre>
+<p><code>version: 2</code> selects MobileNet V2, and <code>alpha: 1.0</code> is its full-width variant: the most accurate option, at the cost of a bigger download. If you care more about load time, a smaller alpha such as <code>0.5</code> is worth testing.</p>
+
+<h2>Step 2: classify an uploaded file</h2>
+<p>The classifier takes an image element, so the uploaded <code>File</code> is turned into an object URL and loaded into an <code>Image</code>:</p>
+<pre><code class="language-js">export const analyzeImage = async (file) =&gt; {
+  const net = await initializeModel();
+
+  const img = new Image();
+  const url = URL.createObjectURL(file);
+  img.src = url;
+  await new Promise((resolve, reject) =&gt; {
+    img.onload = resolve;
+    img.onerror = reject;
+  });
+
+  const predictions = await net.classify(img);
+  URL.revokeObjectURL(url);
+
+  // ...decide whether it looks like a property (next step)
+};</code></pre>
+<p><code>classify()</code> returns the top predictions, each with a <code>className</code> and a <code>probability</code>, for example <code>{ className: 'patio, terrace', probability: 0.61 }</code>.</p>
+
+<h2>Step 3: decide what counts as a "property photo"</h2>
+<p>ImageNet has no single "real-estate photo" class, but plenty of its classes only show up in property photos: <em>patio, terrace</em>; <em>dining table</em>; <em>studio couch</em>; <em>four-poster</em> (bed); <em>window shade</em>; <em>home theater</em> and so on. So the rule is a whitelist of keywords checked against the predicted class names:</p>
+<pre><code class="language-js">const PROPERTY_KEYWORDS = [
+  'house', 'apartment', 'room', 'interior', 'bedroom', 'kitchen', 'bathroom',
+  'sofa', 'couch', 'bed', 'table', 'patio', 'balcony', 'pool', 'window',
+  'door', 'roof', 'garden', 'garage', 'villa', 'office', 'restaurant', /* ... */
+];
+
+const isValid = predictions.some((p) =&gt; {
+  const name = p.className.toLowerCase();
+  return PROPERTY_KEYWORDS.some((keyword) =&gt; name.includes(keyword));
+});
+
+return { isValid, predictions };</code></pre>
+<p>Because the app also lists hotel rooms and commercial spaces, the real list includes words for those too (lobby, storefront, warehouse and similar).</p>
+
+<h2>Step 4: wire it into the upload form</h2>
+<p>When the user picks photos, each file is checked and sorted into accepted and rejected lists, and the form shows a friendly message for the rejected ones:</p>
+<pre><code class="language-js">const validFiles = [];
+const rejectedFiles = [];
+
+for (const file of Array.from(files)) {
+  const { isValid } = await analyzeImage(file);
+  if (isValid) validFiles.push(file);
+  else rejectedFiles.push(file.name);
+}
+
+if (rejectedFiles.length &gt; 0) {
+  setAiError(`Rejected ${rejectedFiles.length} image(s) that didn't look like a property.`);
+}</code></pre>
+
+<h2>A deliberate choice: fail open</h2>
+<p>If the model can't load (a flaky network, an old browser without WebGL), <code>analyzeImage</code> catches the error and returns <code>isValid: true</code>. I chose that on purpose: a helper feature that blocks real users whenever a CDN has a bad moment is worse than letting the occasional wrong photo through. Since the check is about UX rather than security, failing open is the right default here.</p>
+
+<h2>What I would improve next time</h2>
+<ol>
+  <li><strong>Match whole words, not substrings.</strong> <code>includes()</code> is loose: <em>bar</em> also matches <em>barbell</em>, <em>shop</em> matches <em>barbershop</em>, and <em>pool</em> matches <em>pool table</em>. Matching whole words, or keeping a curated list of exact ImageNet class names, removes most false positives.</li>
+  <li><strong>Use the probability.</strong> Right now any match among the top predictions counts, even at 5% confidence. Requiring a minimum probability (or summing the matching predictions) makes the check stricter without being annoying.</li>
+  <li><strong>Start loading earlier.</strong> Calling <code>initializeModel()</code> when the "add listing" form opens, instead of on the first upload, hides most of the download time.</li>
+  <li><strong>Always clean up the object URL.</strong> If the image fails to decode, <code>revokeObjectURL</code> is skipped. Moving it into a <code>finally</code> block fixes the small leak.</li>
+</ol>
+
+<h2>Takeaway</h2>
+<p>For "does this look roughly right?" checks, a pre-trained model in the browser is often all you need: no training, no ML infrastructure, and instant feedback for users. Just keep it in its lane. It improves the experience, while the real validation still belongs on the server.</p>
+<p>You can see the feature in the live <a href="/projects/house-rent-sell">Real Estate Marketplace project</a>, and the full source is on GitHub.</p>

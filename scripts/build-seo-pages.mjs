@@ -12,7 +12,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   SITE, PERSON_ID, WEBSITE_ID, person, aboutParagraphs, experience, education,
-  skillGroups, projects, keyProjectSlugs, resumeSummary, spokenLanguages,
+  skillGroups, projects, keyProjectSlugs, resumeSummary, spokenLanguages, posts,
 } from "./site-data.mjs";
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), "..", "portfoliyo-G", "vcard-personal-portfolio");
@@ -90,7 +90,7 @@ const jsonLd = (graph) =>
 
 // ---------------------------------------------------------------- layout pieces
 
-const head = ({ url, title, description, ogType = "website", noindex = false, graph }) => `<!DOCTYPE html>
+const head = ({ url, title, description, ogType = "website", noindex = false, graph, image = person.ogImage, imageAlt, article, keywords }) => `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -98,29 +98,30 @@ const head = ({ url, title, description, ogType = "website", noindex = false, gr
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
-${noindex ? `  <meta name="robots" content="noindex, follow">\n` : `  <meta name="robots" content="index, follow">\n  <link rel="canonical" href="${abs(url)}">\n`}  <meta name="author" content="${person.name}">
+${keywords ? `  <meta name="keywords" content="${esc(keywords)}">
+` : ""}${noindex ? `  <meta name="robots" content="noindex, follow">\n` : `  <meta name="robots" content="index, follow">\n  <link rel="canonical" href="${abs(url)}">\n`}  <meta name="author" content="${person.name}">
   <meta name="theme-color" content="#121212">
 
   <meta property="og:site_name" content="${person.name}">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:type" content="${ogType}">
-${noindex ? "" : `  <meta property="og:url" content="${abs(url)}">\n`}  <meta property="og:image" content="${abs(person.ogImage)}">
+${noindex ? "" : `  <meta property="og:url" content="${abs(url)}">\n`}  <meta property="og:image" content="${abs(image)}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="${person.name} — ${person.jobTitle}">
+  <meta property="og:image:alt" content="${esc(imageAlt || `${person.name} — ${person.jobTitle}`)}">
   <meta property="og:locale" content="en_IN">
-${ogType === "profile" ? `  <meta property="profile:first_name" content="Utsav">\n  <meta property="profile:last_name" content="Kalathiya">\n` : ""}  <meta name="twitter:card" content="summary_large_image">
+${ogType === "profile" ? `  <meta property="profile:first_name" content="Utsav">\n  <meta property="profile:last_name" content="Kalathiya">\n` : ""}${article ? `  <meta property="article:published_time" content="${article.published}">\n  <meta property="article:modified_time" content="${article.modified}">\n  <meta property="article:author" content="${abs("/about")}">\n${article.tags.map((t) => `  <meta property="article:tag" content="${esc(t)}">\n`).join("")}` : ""}  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(description)}">
-  <meta name="twitter:image" content="${abs(person.ogImage)}">
+  <meta name="twitter:image" content="${abs(image)}">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 
   <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=3">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=6">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -195,13 +196,12 @@ const sidebar = () => `
 
     </aside>`;
 
-// same labels and order as the homepage tabs, so the menu never changes;
-// Blog only exists as a homepage tab, which /#blog opens
+// same labels and order as the homepage tabs, so the menu never changes
 const NAV = [
   ["About", "/about"],
   ["Resume", "/resume"],
   ["Portfolio", "/projects"],
-  ["Blog", "/#blog"],
+  ["Blog", "/blog"],
   ["Contact", "/contact"],
 ];
 
@@ -246,7 +246,7 @@ export const footer = (indent = "      ") => `<footer class="site-footer">
 </footer>`.split("\n").map((l) => (l ? indent + l : l)).join("\n");
 
 const scripts = (extra = "") => `
-  <script src="/assets/js/script.js?v=3"></script>
+  <script src="/assets/js/script.js?v=4"></script>
 ${extra}
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>`;
@@ -260,7 +260,7 @@ ${trail.map(([name, path], i) => i === trail.length - 1
           </ol>
         </nav>`;
 
-const page = ({ url, title, description, ogType, noindex, graph, active, trail, h1, body, extraScripts }) => `${head({ url, title, description, ogType, noindex, graph })}
+const page = ({ url, title, description, ogType, noindex, graph, active, trail, h1, body, extraScripts, image, imageAlt, article, keywords }) => `${head({ url, title, description, ogType, noindex, graph, image, imageAlt, article, keywords })}
 
 <body>
 
@@ -765,6 +765,149 @@ function contactPage() {
   write("contact.html", page({ url, title, description, graph, active: "Contact", trail, h1: "Contact Utsav Kalathiya", body, extraScripts }));
 }
 
+
+// ---------------------------------------------------------------- blog
+
+const BLOG_DIR = join(dirname(fileURLToPath(import.meta.url)), "blog");
+const postUrl = (post) => `/blog/${post.slug}`;
+const postCover = (post, ext) => `/assets/images/blog/${post.slug}.${ext}`;
+const postBody = (post) => readFileSync(join(BLOG_DIR, `${post.slug}.html`), "utf8").trim();
+const isoDate = (d) => `${d}T00:00:00+05:30`;
+const readMinutes = (post) => Math.max(1, Math.round(postBody(post).replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length / 200));
+const formatDate = (d) => new Date(`${d}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+
+// homepage Blog tab cards (same markup as the original template cards)
+export const blogCards = (indent = "            ") => posts.map((post) => `<li class="blog-post-item">
+  <a href="${postUrl(post)}">
+
+    <figure class="blog-banner-box">
+      <img src="${postCover(post, "webp")}" alt="${esc(post.cardTitle)}" width="960" height="504" loading="lazy" decoding="async">
+    </figure>
+
+    <div class="blog-content">
+
+      <div class="blog-meta">
+        <p class="blog-category">${esc(post.category)}</p>
+
+        <span class="dot"></span>
+
+        <time datetime="${post.datePublished}">${formatDate(post.datePublished)}</time>
+
+        <span class="dot"></span>
+
+        <p class="blog-category">${readMinutes(post)} min read</p>
+      </div>
+
+      <h3 class="h3 blog-item-title">${esc(post.cardTitle)}</h3>
+
+      <p class="blog-text">${esc(post.description)}</p>
+
+    </div>
+
+  </a>
+</li>`).join("\n\n").split("\n").map((l) => (l ? indent + l : l)).join("\n");
+
+function blogIndexPage() {
+  const url = "/blog";
+  const title = "Blog | Utsav Kalathiya, Full Stack Developer";
+  const description =
+    "Articles by Utsav Kalathiya on full-stack web development with React, Node.js, Express, MongoDB and Angular, drawn from real projects.";
+  const trail = [["Home", "/"], ["Blog", url]];
+  const graph = [
+    webPageNode("CollectionPage", url, title, description, {
+      about: personRef,
+      mainEntity: {
+        "@type": "Blog",
+        "@id": `${abs(url)}#blog`,
+        name: `${person.name}'s Blog`,
+        url: abs(url),
+        author: personRef,
+        blogPost: posts.map((post) => ({ "@id": `${abs(postUrl(post))}#article` })),
+      },
+      dateModified: MODIFIED,
+    }),
+    breadcrumbNode(url, trail),
+  ];
+  const body = `
+        <section class="content-section">
+          <p>Practical write-ups from projects I've built, covering React, Node.js, Express, MongoDB and Angular. Each article is based on real code.</p>
+        </section>
+
+        <section class="blog-posts">
+          <ul class="blog-posts-list">
+${blogCards("            ").replace(/<h3 class="h3 blog-item-title">/g, '<h2 class="h3 blog-item-title">').replace(/<\/h3>/g, "</h2>")}
+          </ul>
+        </section>
+`;
+  write("blog/index.html", page({ url, title, description, graph, active: "Blog", trail, h1: "Blog", body }));
+}
+
+function blogPostPage(post) {
+  const url = postUrl(post);
+  const title = `${post.seoTitle || post.cardTitle} | Utsav Kalathiya`;
+  const published = isoDate(post.datePublished);
+  const modified = isoDate(post.dateModified || post.datePublished);
+  const trail = [["Home", "/"], ["Blog", "/blog"], [post.cardTitle, url]];
+  const related = post.relatedProject && bySlug(post.relatedProject);
+  const others = posts.filter((o) => o.slug !== post.slug);
+  const graph = [
+    webPageNode("WebPage", url, title, post.description, {
+      mainEntity: { "@id": `${abs(url)}#article` },
+      dateModified: modified,
+    }),
+    {
+      "@type": "BlogPosting",
+      "@id": `${abs(url)}#article`,
+      headline: post.title,
+      description: post.description,
+      url: abs(url),
+      mainEntityOfPage: { "@id": `${abs(url)}#webpage` },
+      image: abs(postCover(post, "jpg")),
+      datePublished: published,
+      dateModified: modified,
+      author: { "@type": "Person", "@id": PERSON_ID, name: person.name, url: abs("/about") },
+      publisher: personRef,
+      isPartOf: { "@id": `${abs("/blog")}#blog` },
+      articleSection: post.category,
+      keywords: post.tags.join(", "),
+      inLanguage: "en",
+      ...(related ? { about: { "@id": `${abs(projectUrl(related))}#project` } } : {}),
+    },
+    breadcrumbNode(url, trail),
+  ];
+  const body = `
+        <p class="post-meta">
+          By <a class="text-link" href="/about">${person.name}</a> ·
+          <time datetime="${post.datePublished}">${formatDate(post.datePublished)}</time> ·
+          ${readMinutes(post)} min read
+        </p>
+
+        <figure class="post-cover">
+          <img src="${postCover(post, "webp")}" alt="" width="960" height="504" fetchpriority="high">
+        </figure>
+
+        <div class="post-body">
+${postBody(post)}
+        </div>
+
+        <section class="content-section post-footer">
+          ${tags(post.tags)}
+${related ? `          <p>Related project: <a class="text-link" href="${projectUrl(related)}">${esc(related.name)}</a></p>\n` : ""}          <h2 class="h3">More articles</h2>
+          <ul class="bullet-list">
+${others.map((o) => `            <li><a class="text-link" href="${postUrl(o)}">${esc(o.cardTitle)}</a></li>`).join("\n")}
+          </ul>
+          <p><a class="text-link" href="/blog">All articles</a> · <a class="text-link" href="/about">About ${person.name}</a></p>
+        </section>
+`;
+  write(`blog/${post.slug}.html`, page({
+    url, title, description: post.description, ogType: "article", graph, active: "Blog", trail,
+    h1: esc(post.title), body,
+    image: postCover(post, "jpg"), imageAlt: post.cardTitle,
+    keywords: [...post.tags, person.name].join(", "),
+    article: { published, modified, tags: post.tags },
+  }));
+}
+
 function notFoundPage() {
   const body = `
         <section class="content-section">
@@ -821,6 +964,7 @@ function syncHomepage() {
   };
   replaceBlock("jsonld", `  ${jsonLd(graph)}`);
   replaceBlock("footer", footer("      "));
+  replaceBlock("blog", blogCards("            "));
   writeFileSync(file, html);
   console.log("synced index.html");
 }
@@ -834,6 +978,8 @@ function sitemap() {
     ["/experience", "0.7"],
     ["/skills", "0.7"],
     ["/resume", "0.8"],
+    ["/blog", "0.7"],
+    ...posts.map((post) => [postUrl(post), "0.6"]),
     ["/contact", "0.5"],
   ];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -849,6 +995,8 @@ ${urls.map(([path, priority]) => `  <url>
 }
 
 aboutPage();
+blogIndexPage();
+posts.forEach(blogPostPage);
 experiencePage();
 skillsPage();
 projectsIndexPage();

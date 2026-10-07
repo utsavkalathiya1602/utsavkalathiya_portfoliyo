@@ -373,3 +373,100 @@ export const projects = [
 
 // The three projects featured on the resume.
 export const keyProjectSlugs = ["house-rent-sell", "kisan-bazaar", "job-portal"];
+
+// Blog posts. Each body lives in scripts/blog/<slug>.html. Posts are based on
+// Utsav's own project code (linked GitHub repos) and resume; datePublished is
+// the real publish date, never backdated.
+export const posts = [
+  {
+    slug: "ai-coding-assistants-full-stack-developer",
+    emblem: "AI",
+    seoTitle: "AI Coding Assistants: What to Delegate vs Own",
+    title: "Using AI Coding Assistants as a Full Stack Developer: What to Delegate and What to Own",
+    cardTitle: "Using AI Coding Assistants: What to Delegate and What to Own",
+    description:
+      "How I use AI coding assistants as a full stack developer: the work I delegate, the work I always keep, and the rules that keep speed from costing code quality.",
+    category: "AI & Careers",
+    tags: ["AI", "Developer productivity", "Code review", "Career"],
+    datePublished: "2026-10-07",
+    relatedProject: null,
+  },
+  {
+    slug: "bca-to-full-stack-developer-roadmap-india",
+    emblem: "BCA → Dev",
+    seoTitle: "BCA to Full Stack Developer Roadmap",
+    title: "From BCA to Full Stack Developer: A Practical Roadmap for Students in India",
+    cardTitle: "From BCA to Full Stack Developer: A Practical Roadmap",
+    description:
+      "The roadmap I'd follow from a BCA degree to a full stack developer job in India: fundamentals, one stack, real projects, deployment and internships.",
+    category: "Career",
+    tags: ["Career", "Roadmap", "MERN", "Students"],
+    datePublished: "2026-10-07",
+    relatedProject: null,
+  },
+  {
+    slug: "validate-image-uploads-tensorflow-js-mobilenet",
+    emblem: "TF.js", // badge on the cover image
+    seoTitle: "TensorFlow.js Image Validation with MobileNet", // <title>, kept short for search results
+    title: "Validating Property Photos in the Browser with TensorFlow.js and MobileNet",
+    cardTitle: "Validating Image Uploads in the Browser with TensorFlow.js",
+    description:
+      "How I used TensorFlow.js and a pre-trained MobileNet model to check that uploaded listing photos look like real properties, right in the browser, before upload.",
+    category: "Machine Learning",
+    tags: ["TensorFlow.js", "MobileNet", "React", "Image validation"],
+    datePublished: "2026-10-07",
+    relatedProject: "house-rent-sell",
+  },
+  {
+    slug: "role-based-access-control-mern-job-portal",
+    emblem: "RBAC", // badge on the cover image
+    seoTitle: "RBAC in a MERN Job Portal with JWT", // <title>, kept short for search results
+    title: "Role-Based Access Control in a MERN Job Portal: Job Seekers vs Companies",
+    cardTitle: "Role-Based Access Control in a MERN Job Portal",
+    description:
+      "How I structured role-based access control with JWT and Express middleware in a MERN job portal, plus the ownership checks and checklist I use for secure APIs.",
+    category: "Backend",
+    tags: ["Node.js", "Express.js", "MongoDB", "JWT", "RBAC"],
+    datePublished: "2026-10-07",
+    relatedProject: "job-portal",
+  },
+  {
+    slug: "google-sign-in-mern-jwt",
+    emblem: "OAuth", // badge on the cover image
+    seoTitle: "Google Sign-In in a MERN App with JWT", // <title>, kept short for search results
+    title: "Adding Google Sign-In to a MERN App: From Google Token to Your Own JWT",
+    cardTitle: "Adding Google Sign-In to a MERN App with Your Own JWT",
+    description:
+      "A walkthrough of Google sign-in in a React and Express app: verifying the Google token, linking accounts, issuing your own JWT, and hardening it for production.",
+    category: "Authentication",
+    tags: ["React", "Express.js", "Google OAuth", "JWT"],
+    datePublished: "2026-10-07",
+    relatedProject: "house-rent-sell",
+  },
+  {
+    slug: "upgrade-angular-11-to-19",
+    emblem: "v11 → v19", // badge on the cover image
+    seoTitle: "Upgrade Angular 11 to 19, Step by Step", // <title>, kept short for search results
+    title: "Upgrading Angular from v11 to v19: A Step-by-Step Approach",
+    cardTitle: "Upgrading Angular from v11 to v19: A Step-by-Step Approach",
+    description:
+      "A practical guide to upgrading a production Angular app from v11 to v19: the one-version-at-a-time process and the key changes in each release along the way.",
+    category: "Frontend",
+    tags: ["Angular", "TypeScript", "Upgrades"],
+    datePublished: "2026-10-07",
+    relatedProject: null,
+  },
+  {
+    slug: "remote-developer-async-habits",
+    emblem: "Async",
+    seoTitle: "Remote Developer Habits for Async Teams",
+    title: "Working Remotely as a Developer: Habits That Make Async Teams Work",
+    cardTitle: "Working Remotely as a Developer: Habits for Async Teams",
+    description:
+      "Practical habits for remote developers in async teams: written decisions, reviewable pull requests, clear status updates, early blockers and healthy boundaries.",
+    category: "Remote Work",
+    tags: ["Remote work", "Async communication", "Agile", "Career"],
+    datePublished: "2026-10-07",
+    relatedProject: null,
+  },
+];

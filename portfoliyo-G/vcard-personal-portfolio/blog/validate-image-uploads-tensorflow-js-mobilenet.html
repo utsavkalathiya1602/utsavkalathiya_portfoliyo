@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TensorFlow.js Image Validation with MobileNet | Utsav Kalathiya</title>
+  <meta name="description" content="How I used TensorFlow.js and a pre-trained MobileNet model to check that uploaded listing photos look like real properties, right in the browser, before upload.">
+  <meta name="keywords" content="TensorFlow.js, MobileNet, React, Image validation, Utsav Kalathiya">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet">
+  <meta name="author" content="Utsav Kalathiya">
+  <meta name="theme-color" content="#121212">
+
+  <meta property="og:site_name" content="Utsav Kalathiya">
+  <meta property="og:title" content="TensorFlow.js Image Validation with MobileNet | Utsav Kalathiya">
+  <meta property="og:description" content="How I used TensorFlow.js and a pre-trained MobileNet model to check that uploaded listing photos look like real properties, right in the browser, before upload.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet">
+  <meta property="og:image" content="https://utsavkalathiya.vercel.app/assets/images/blog/validate-image-uploads-tensorflow-js-mobilenet.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Validating Image Uploads in the Browser with TensorFlow.js">
+  <meta property="og:locale" content="en_IN">
+  <meta property="article:published_time" content="2026-10-07T00:00:00+05:30">
+  <meta property="article:modified_time" content="2026-10-07T00:00:00+05:30">
+  <meta property="article:author" content="https://utsavkalathiya.vercel.app/about">
+  <meta property="article:tag" content="TensorFlow.js">
+  <meta property="article:tag" content="MobileNet">
+  <meta property="article:tag" content="React">
+  <meta property="article:tag" content="Image validation">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TensorFlow.js Image Validation with MobileNet | Utsav Kalathiya">
+  <meta name="twitter:description" content="How I used TensorFlow.js and a pre-trained MobileNet model to check that uploaded listing photos look like real properties, right in the browser, before upload.">
+  <meta name="twitter:image" content="https://utsavkalathiya.vercel.app/assets/images/blog/validate-image-uploads-tensorflow-js-mobilenet.jpg">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=6">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet#webpage",
+      "url": "https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet",
+      "name": "TensorFlow.js Image Validation with MobileNet | Utsav Kalathiya",
+      "description": "How I used TensorFlow.js and a pre-trained MobileNet model to check that uploaded listing photos look like real properties, right in the browser, before upload.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://utsavkalathiya.vercel.app/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet#article"
+      },
+      "dateModified": "2026-10-07T00:00:00+05:30"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet#article",
+      "headline": "Validating Property Photos in the Browser with TensorFlow.js and MobileNet",
+      "description": "How I used TensorFlow.js and a pre-trained MobileNet model to check that uploaded listing photos look like real properties, right in the browser, before upload.",
+      "url": "https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet",
+      "mainEntityOfPage": {
+        "@id": "https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet#webpage"
+      },
+      "image": "https://utsavkalathiya.vercel.app/assets/images/blog/validate-image-uploads-tensorflow-js-mobilenet.jpg",
+      "datePublished": "2026-10-07T00:00:00+05:30",
+      "dateModified": "2026-10-07T00:00:00+05:30",
+      "author": {
+        "@type": "Person",
+        "@id": "https://utsavkalathiya.vercel.app/#person",
+        "name": "Utsav Kalathiya",
+        "url": "https://utsavkalathiya.vercel.app/about"
+      },
+      "publisher": {
+        "@id": "https://utsavkalathiya.vercel.app/#person"
+      },
+      "isPartOf": {
+        "@id": "https://utsavkalathiya.vercel.app/blog#blog"
+      },
+      "articleSection": "Machine Learning",
+      "keywords": "TensorFlow.js, MobileNet, React, Image validation",
+      "inLanguage": "en",
+      "about": {
+        "@id": "https://utsavkalathiya.vercel.app/projects/house-rent-sell#project"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://utsavkalathiya.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://utsavkalathiya.vercel.app/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Validating Image Uploads in the Browser with TensorFlow.js",
+          "item": "https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+
+</head>
+
+<body>
+
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <main>
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="/assets/images/utsav-kalathiya-full-stack-developer.webp" alt="Utsav Kalathiya - Full Stack Developer" width="80" height="80" fetchpriority="high">
+        </figure>
+
+        <div class="info-content">
+          <p class="name" title="Utsav Kalathiya"><a href="/" style="color: inherit;">Utsav Kalathiya</a></p>
+
+          <p class="title">Full Stack Developer</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn aria-expanded="false" aria-label="Show contacts">
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:utsavkalathiya0001@gmail.com" class="contact-link">utsavkalathiya0001@gmail.com</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="location-outline" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Surat, Gujarat, India</address>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-github" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+              <a href="https://github.com/utsavkalathiya1602" class="contact-link" target="_blank" rel="noopener noreferrer">github.com/utsavkalathiya1602</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">LinkedIn</p>
+              <a href="https://www.linkedin.com/in/utsavkalathiya1602/" class="contact-link" target="_blank" rel="noopener noreferrer">linkedin.com/in/utsavkalathiya1602</a>
+            </div>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+    <div class="main-content">
+
+      <nav class="navbar" aria-label="Main">
+
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="/about" class="navbar-link">About</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/resume" class="navbar-link">Resume</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/projects" class="navbar-link">Portfolio</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/blog" class="navbar-link active" aria-current="page">Blog</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/contact" class="navbar-link">Contact</a>
+          </li>
+        </ul>
+
+      </nav>
+
+      <article class="active" id="content">
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><span aria-current="page">Validating Image Uploads in the Browser with TensorFlow.js</span></li>
+          </ol>
+        </nav>
+
+        <header>
+          <h1 class="h2 article-title">Validating Property Photos in the Browser with TensorFlow.js and MobileNet</h1>
+        </header>
+
+        <p class="post-meta">
+          By <a class="text-link" href="/about">Utsav Kalathiya</a> ·
+          <time datetime="2026-10-07">7 Oct 2026</time> ·
+          5 min read
+        </p>
+
+        <figure class="post-cover">
+          <img src="/assets/images/blog/validate-image-uploads-tensorflow-js-mobilenet.webp" alt="" width="960" height="504" fetchpriority="high">
+        </figure>
+
+        <div class="post-body">
+<p>Listings on my <a href="/projects/house-rent-sell">Real Estate Marketplace</a> live or die by their photos. When people add a property, they sometimes upload a selfie, a screenshot or a random image by mistake. I wanted a quick check that runs <em>before</em> the upload: does this picture actually look like a house, a room or a building?</p>
+
+<p>It turned out you don't need a backend ML service for that. A pre-trained image classifier running in the browser with <strong>TensorFlow.js</strong> does a good job, and the whole thing is about 80 lines of JavaScript. This post walks through how I built it, the trade-offs I chose, and what I would improve next time.</p>
+
+<h2>Why run the check in the browser?</h2>
+<ul>
+  <li><strong>Instant feedback.</strong> The user finds out a photo was rejected while they are still on the form, not after a slow upload.</li>
+  <li><strong>No ML server to run.</strong> The model runs on the user's device using WebGL, so there is no GPU bill and no extra API.</li>
+  <li><strong>Less wasted bandwidth.</strong> Rejected images never get uploaded to the image host (Cloudinary, in my case).</li>
+</ul>
+<p>The important caveat: a browser-side check is a <em>user-experience feature</em>, not a security control. Anyone can bypass client code, so the server still has to validate file type, size and content.</p>
+
+<h2>The model: MobileNet</h2>
+<p>MobileNet is a small, fast image-classification network trained on ImageNet, a dataset with 1,000 everyday object classes. The <code>@tensorflow-models/mobilenet</code> package wraps it so you can classify an image in one call. Install both packages:</p>
+<pre><code>npm install @tensorflow/tfjs @tensorflow-models/mobilenet</code></pre>
+
+<h2>Step 1: load the model once and reuse it</h2>
+<p>Downloading the model weights is the slowest part, so I load it lazily the first time it is needed and keep it in a module-level variable:</p>
+<pre><code class="language-js">import * as tf from '@tensorflow/tfjs';
+import * as mobilenet from '@tensorflow-models/mobilenet';
+
+let model = null;
+
+export const initializeModel = async () =&gt; {
+  if (model) return model;
+
+  await tf.ready(); // wait for the backend (usually WebGL in the browser)
+  model = await mobilenet.load({ version: 2, alpha: 1.0 });
+  return model;
+};</code></pre>
+<p><code>version: 2</code> selects MobileNet V2, and <code>alpha: 1.0</code> is its full-width variant: the most accurate option, at the cost of a bigger download. If you care more about load time, a smaller alpha such as <code>0.5</code> is worth testing.</p>
+
+<h2>Step 2: classify an uploaded file</h2>
+<p>The classifier takes an image element, so the uploaded <code>File</code> is turned into an object URL and loaded into an <code>Image</code>:</p>
+<pre><code class="language-js">export const analyzeImage = async (file) =&gt; {
+  const net = await initializeModel();
+
+  const img = new Image();
+  const url = URL.createObjectURL(file);
+  img.src = url;
+  await new Promise((resolve, reject) =&gt; {
+    img.onload = resolve;
+    img.onerror = reject;
+  });
+
+  const predictions = await net.classify(img);
+  URL.revokeObjectURL(url);
+
+  // ...decide whether it looks like a property (next step)
+};</code></pre>
+<p><code>classify()</code> returns the top predictions, each with a <code>className</code> and a <code>probability</code>, for example <code>{ className: 'patio, terrace', probability: 0.61 }</code>.</p>
+
+<h2>Step 3: decide what counts as a "property photo"</h2>
+<p>ImageNet has no single "real-estate photo" class, but plenty of its classes only show up in property photos: <em>patio, terrace</em>; <em>dining table</em>; <em>studio couch</em>; <em>four-poster</em> (bed); <em>window shade</em>; <em>home theater</em> and so on. So the rule is a whitelist of keywords checked against the predicted class names:</p>
+<pre><code class="language-js">const PROPERTY_KEYWORDS = [
+  'house', 'apartment', 'room', 'interior', 'bedroom', 'kitchen', 'bathroom',
+  'sofa', 'couch', 'bed', 'table', 'patio', 'balcony', 'pool', 'window',
+  'door', 'roof', 'garden', 'garage', 'villa', 'office', 'restaurant', /* ... */
+];
+
+const isValid = predictions.some((p) =&gt; {
+  const name = p.className.toLowerCase();
+  return PROPERTY_KEYWORDS.some((keyword) =&gt; name.includes(keyword));
+});
+
+return { isValid, predictions };</code></pre>
+<p>Because the app also lists hotel rooms and commercial spaces, the real list includes words for those too (lobby, storefront, warehouse and similar).</p>
+
+<h2>Step 4: wire it into the upload form</h2>
+<p>When the user picks photos, each file is checked and sorted into accepted and rejected lists, and the form shows a friendly message for the rejected ones:</p>
+<pre><code class="language-js">const validFiles = [];
+const rejectedFiles = [];
+
+for (const file of Array.from(files)) {
+  const { isValid } = await analyzeImage(file);
+  if (isValid) validFiles.push(file);
+  else rejectedFiles.push(file.name);
+}
+
+if (rejectedFiles.length &gt; 0) {
+  setAiError(`Rejected ${rejectedFiles.length} image(s) that didn't look like a property.`);
+}</code></pre>
+
+<h2>A deliberate choice: fail open</h2>
+<p>If the model can't load (a flaky network, an old browser without WebGL), <code>analyzeImage</code> catches the error and returns <code>isValid: true</code>. I chose that on purpose: a helper feature that blocks real users whenever a CDN has a bad moment is worse than letting the occasional wrong photo through. Since the check is about UX rather than security, failing open is the right default here.</p>
+
+<h2>What I would improve next time</h2>
+<ol>
+  <li><strong>Match whole words, not substrings.</strong> <code>includes()</code> is loose: <em>bar</em> also matches <em>barbell</em>, <em>shop</em> matches <em>barbershop</em>, and <em>pool</em> matches <em>pool table</em>. Matching whole words, or keeping a curated list of exact ImageNet class names, removes most false positives.</li>
+  <li><strong>Use the probability.</strong> Right now any match among the top predictions counts, even at 5% confidence. Requiring a minimum probability (or summing the matching predictions) makes the check stricter without being annoying.</li>
+  <li><strong>Start loading earlier.</strong> Calling <code>initializeModel()</code> when the "add listing" form opens, instead of on the first upload, hides most of the download time.</li>
+  <li><strong>Always clean up the object URL.</strong> If the image fails to decode, <code>revokeObjectURL</code> is skipped. Moving it into a <code>finally</code> block fixes the small leak.</li>
+</ol>
+
+<h2>Takeaway</h2>
+<p>For "does this look roughly right?" checks, a pre-trained model in the browser is often all you need: no training, no ML infrastructure, and instant feedback for users. Just keep it in its lane. It improves the experience, while the real validation still belongs on the server.</p>
+<p>You can see the feature in the live <a href="/projects/house-rent-sell">Real Estate Marketplace project</a>, and the full source is on GitHub.</p>
+        </div>
+
+        <section class="content-section post-footer">
+          <ul class="tag-list"><li>TensorFlow.js</li><li>MobileNet</li><li>React</li><li>Image validation</li></ul>
+          <p>Related project: <a class="text-link" href="/projects/house-rent-sell">Real Estate Marketplace (House Rent &amp; Sell)</a></p>
+          <h2 class="h3">More articles</h2>
+          <ul class="bullet-list">
+            <li><a class="text-link" href="/blog/ai-coding-assistants-full-stack-developer">Using AI Coding Assistants: What to Delegate and What to Own</a></li>
+            <li><a class="text-link" href="/blog/bca-to-full-stack-developer-roadmap-india">From BCA to Full Stack Developer: A Practical Roadmap</a></li>
+            <li><a class="text-link" href="/blog/role-based-access-control-mern-job-portal">Role-Based Access Control in a MERN Job Portal</a></li>
+            <li><a class="text-link" href="/blog/google-sign-in-mern-jwt">Adding Google Sign-In to a MERN App with Your Own JWT</a></li>
+            <li><a class="text-link" href="/blog/upgrade-angular-11-to-19">Upgrading Angular from v11 to v19: A Step-by-Step Approach</a></li>
+            <li><a class="text-link" href="/blog/remote-developer-async-habits">Working Remotely as a Developer: Habits for Async Teams</a></li>
+          </ul>
+          <p><a class="text-link" href="/blog">All articles</a> · <a class="text-link" href="/about">About Utsav Kalathiya</a></p>
+        </section>
+
+      </article>
+
+      <footer class="site-footer">
+
+        <div class="site-footer-brand">
+          <p class="site-footer-name">Utsav Kalathiya</p>
+          <p>Full Stack Developer · Surat, Gujarat, India</p>
+        </div>
+
+        <nav class="site-footer-nav" aria-label="Footer">
+          <ul class="site-footer-links">
+            <li><a href="/about">About</a></li>
+            <li><a href="/experience">Experience</a></li>
+            <li><a href="/skills">Skills</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/resume">Resume</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <ul class="site-footer-social">
+          <li><a href="https://github.com/utsavkalathiya1602" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-github" aria-hidden="true"></ion-icon>GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/utsavkalathiya1602/" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon>LinkedIn</a></li>
+          <li><a href="mailto:utsavkalathiya0001@gmail.com"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon>Email</a></li>
+          <li><a href="/"><ion-icon name="globe-outline" aria-hidden="true"></ion-icon>Portfolio</a></li>
+        </ul>
+
+        <p class="site-footer-copy">&copy; <span data-year>2026</span> Utsav Kalathiya. All rights reserved.</p>
+
+      </footer>
+
+    </div>
+
+  </main>
+
+  <script src="/assets/js/script.js?v=4"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

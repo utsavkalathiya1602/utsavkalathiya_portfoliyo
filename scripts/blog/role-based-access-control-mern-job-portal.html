@@ -1,0 +1,100 @@
+<p>A job portal has two very different kinds of users. <strong>Job seekers</strong> browse jobs, upload a resume and apply. <strong>Companies</strong> post jobs, hide or show them, review applicants and accept or reject applications. A job seeker should never be able to post a job, and a company should never be able to edit another company's listings.</p>
+
+<p>That's role-based access control (RBAC). Here's how I structured it in the MERN <a href="/projects/job-portal">Job Portal</a> I built during my internship at NIQOX, and the checklist I now use to make it solid.</p>
+
+<h2>Two roles, two collections</h2>
+<p>Instead of one <code>users</code> collection with a <code>role</code> field, the app stores job seekers and companies in separate MongoDB collections, <code>User</code> and <code>Company</code>. The two have very different data (a company has a logo and its posted jobs; a job seeker has a resume and applications), and they register and log in through separate endpoints.</p>
+<p>Applications link the two sides together:</p>
+<pre><code class="language-js">const jobApplicationSchema = mongoose.Schema({
+  userId:    { type: String, ref: 'User', required: true },
+  companyId: { type: mongoose.Types.ObjectId, ref: 'Company', required: true },
+  jobId:     { type: mongoose.Types.ObjectId, ref: 'Job', required: true },
+  status:    { type: String, default: 'Pending' },
+  date:      { type: Number, required: true },
+});</code></pre>
+
+<h2>One auth middleware per role</h2>
+<p>Each role gets its own Express middleware. It verifies the JWT, loads the account from <em>that role's</em> collection, and attaches it to the request. Here is the company version (the job-seeker one is the same with <code>User</code> and <code>req.userData</code>):</p>
+<pre><code class="language-js">import jwt from 'jsonwebtoken';
+import Company from '../models/Company.js';
+
+const companyAuthMiddleware = async (req, res, next) =&gt; {
+  try {
+    const token = req.headers.token;
+    if (!token) return res.status(401).json({ message: 'Unauthorized, login again' });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const company = await Company.findById(decoded.id).select('-password');
+    if (!company) return res.status(404).json({ message: 'Company not found' });
+
+    req.companyData = company;
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: 'Unauthorized, login again' });
+  }
+};</code></pre>
+<p>Two details matter here. <code>select('-password')</code> keeps the password hash out of <code>req</code>, so it can never leak into a response by accident. And because a company token is looked up in the <code>Company</code> collection, a job seeker's token simply finds nothing there and gets rejected.</p>
+
+<h2>Protecting the routes</h2>
+<p>With the middleware in place, each route declares who may call it. Public routes get no middleware at all:</p>
+<pre><code class="language-js">// public
+router.get('/all-jobs', getAllJobs);
+
+// companies only
+router.post('/post-job', companyAuthMiddleware, postJob);
+router.post('/change-visiblity', companyAuthMiddleware, changeJobVisibility);
+router.post('/view-applications', companyAuthMiddleware, getCompanyJobApplicants);
+
+// job seekers only
+router.post('/apply-job', userAuthMiddleware, applyJob);
+router.post('/upload-resume', userAuthMiddleware, upload.single('resume'), uploadResume);</code></pre>
+<p>Reading the route file now tells you the whole permission model at a glance, which is a big part of why I like this pattern.</p>
+
+<h2>Roles aren't enough: check ownership</h2>
+<p>The middleware answers <em>"who are you?"</em> It doesn't answer <em>"is this yours?"</em> A logged-in company passes <code>companyAuthMiddleware</code>, but that alone doesn't mean it may change <em>every</em> job. Each handler that modifies a record has to compare the record's owner with the caller. The job-visibility toggle does exactly that:</p>
+<pre><code class="language-js">export const changeJobVisibility = async (req, res) =&gt; {
+  const { id } = req.body;
+  const companyId = req.companyData._id;
+
+  const job = await Job.findById(id);
+  if (!job) return res.status(404).json({ success: false, message: 'Job not found' });
+
+  if (job.companyId.toString() === companyId.toString()) {
+    job.visible = !job.visible;
+  }
+  await job.save();
+  return res.status(200).json({ success: true, message: 'Visibility changed' });
+};</code></pre>
+<p>One refinement I'd make: when the caller isn't the owner, this still responds with <code>success: true</code> even though nothing changed. Returning an explicit error is clearer for the frontend and for anyone debugging.</p>
+<p>The ownership check itself is also easy to forget on the third or fourth endpoint. A neat way to make it impossible to skip is to put the owner <em>into the query</em>, so a record that belongs to someone else is never found at all:</p>
+<pre><code class="language-js">// update an application only if it belongs to the calling company
+const application = await JobApplication.findOneAndUpdate(
+  { _id: id, companyId: req.companyData._id },
+  { status },
+  { new: true }
+);
+if (!application) {
+  return res.status(404).json({ success: false, message: 'Application not found' });
+}</code></pre>
+
+<h2>My RBAC checklist for Express APIs</h2>
+<ol>
+  <li><strong>Keep the JWT secret in an environment variable</strong> (<code>process.env.JWT_SECRET</code>), never in the source code. Anyone with the secret can mint a valid token for any account.</li>
+  <li><strong>Use the standard header.</strong> <code>Authorization: Bearer &lt;token&gt;</code> works with every HTTP client and proxy, unlike a custom <code>token</code> header.</li>
+  <li><strong>Put the role in the token</strong> and write one reusable guard instead of copying middleware per role:
+<pre><code class="language-js">const requireRole = (role) =&gt; (req, res, next) =&gt; {
+  if (req.auth?.role !== role) {
+    return res.status(403).json({ message: 'Forbidden' });
+  }
+  next();
+};
+
+router.post('/post-job', authenticate, requireRole('company'), postJob);</code></pre></li>
+  <li><strong>Return the right status code.</strong> <code>401</code> means "not logged in", <code>403</code> means "logged in, but not allowed". For other users' records, <code>404</code> avoids revealing that the record exists.</li>
+  <li><strong>Check ownership on every write</strong>, preferably inside the database query as shown above.</li>
+  <li><strong>Validate values, not just presence.</strong> An application status should only ever be one of a few values, so make it an enum in the schema: <code>enum: ['Pending', 'Accepted', 'Rejected']</code>.</li>
+</ol>
+
+<h2>Takeaway</h2>
+<p>Separate middleware per role gives you a permission model you can read straight from the route file, which is great for a two-sided app like a job portal. Pair it with ownership checks on every write and a properly managed secret, and you have access control that holds up.</p>
+<p>The <a href="/projects/job-portal">Job Portal project page</a> has the live demo and source code.</p>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Utsav Kalathiya, Full Stack Developer</title>
+  <meta name="description" content="Articles by Utsav Kalathiya on full-stack web development with React, Node.js, Express, MongoDB and Angular, drawn from real projects.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://utsavkalathiya.vercel.app/blog">
+  <meta name="author" content="Utsav Kalathiya">
+  <meta name="theme-color" content="#121212">
+
+  <meta property="og:site_name" content="Utsav Kalathiya">
+  <meta property="og:title" content="Blog | Utsav Kalathiya, Full Stack Developer">
+  <meta property="og:description" content="Articles by Utsav Kalathiya on full-stack web development with React, Node.js, Express, MongoDB and Angular, drawn from real projects.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://utsavkalathiya.vercel.app/blog">
+  <meta property="og:image" content="https://utsavkalathiya.vercel.app/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Utsav Kalathiya — Full Stack Developer">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blog | Utsav Kalathiya, Full Stack Developer">
+  <meta name="twitter:description" content="Articles by Utsav Kalathiya on full-stack web development with React, Node.js, Express, MongoDB and Angular, drawn from real projects.">
+  <meta name="twitter:image" content="https://utsavkalathiya.vercel.app/assets/images/og-image.png">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=6">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://utsavkalathiya.vercel.app/blog#webpage",
+      "url": "https://utsavkalathiya.vercel.app/blog",
+      "name": "Blog | Utsav Kalathiya, Full Stack Developer",
+      "description": "Articles by Utsav Kalathiya on full-stack web development with React, Node.js, Express, MongoDB and Angular, drawn from real projects.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://utsavkalathiya.vercel.app/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://utsavkalathiya.vercel.app/blog#breadcrumb"
+      },
+      "about": {
+        "@id": "https://utsavkalathiya.vercel.app/#person"
+      },
+      "mainEntity": {
+        "@type": "Blog",
+        "@id": "https://utsavkalathiya.vercel.app/blog#blog",
+        "name": "Utsav Kalathiya's Blog",
+        "url": "https://utsavkalathiya.vercel.app/blog",
+        "author": {
+          "@id": "https://utsavkalathiya.vercel.app/#person"
+        },
+        "blogPost": [
+          {
+            "@id": "https://utsavkalathiya.vercel.app/blog/ai-coding-assistants-full-stack-developer#article"
+          },
+          {
+            "@id": "https://utsavkalathiya.vercel.app/blog/bca-to-full-stack-developer-roadmap-india#article"
+          },
+          {
+            "@id": "https://utsavkalathiya.vercel.app/blog/validate-image-uploads-tensorflow-js-mobilenet#article"
+          },
+          {
+            "@id": "https://utsavkalathiya.vercel.app/blog/role-based-access-control-mern-job-portal#article"
+          },
+          {
+            "@id": "https://utsavkalathiya.vercel.app/blog/google-sign-in-mern-jwt#article"
+          },
+          {
+            "@id": "https://utsavkalathiya.vercel.app/blog/upgrade-angular-11-to-19#article"
+          },
+          {
+            "@id": "https://utsavkalathiya.vercel.app/blog/remote-developer-async-habits#article"
+          }
+        ]
+      },
+      "dateModified": "2026-10-07T00:00:00+05:30"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://utsavkalathiya.vercel.app/blog#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://utsavkalathiya.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://utsavkalathiya.vercel.app/blog"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+
+</head>
+
+<body>
+
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <main>
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="/assets/images/utsav-kalathiya-full-stack-developer.webp" alt="Utsav Kalathiya - Full Stack Developer" width="80" height="80" fetchpriority="high">
+        </figure>
+
+        <div class="info-content">
+          <p class="name" title="Utsav Kalathiya"><a href="/" style="color: inherit;">Utsav Kalathiya</a></p>
+
+          <p class="title">Full Stack Developer</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn aria-expanded="false" aria-label="Show contacts">
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:utsavkalathiya0001@gmail.com" class="contact-link">utsavkalathiya0001@gmail.com</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="location-outline" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Surat, Gujarat, India</address>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-github" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+              <a href="https://github.com/utsavkalathiya1602" class="contact-link" target="_blank" rel="noopener noreferrer">github.com/utsavkalathiya1602</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info">
+              <p class="contact-title">LinkedIn</p>
+              <a href="https://www.linkedin.com/in/utsavkalathiya1602/" class="contact-link" target="_blank" rel="noopener noreferrer">linkedin.com/in/utsavkalathiya1602</a>
+            </div>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+    <div class="main-content">
+
+      <nav class="navbar" aria-label="Main">
+
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="/about" class="navbar-link">About</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/resume" class="navbar-link">Resume</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/projects" class="navbar-link">Portfolio</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/blog" class="navbar-link active" aria-current="page">Blog</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/contact" class="navbar-link">Contact</a>
+          </li>
+        </ul>
+
+      </nav>
+
+      <article class="active" id="content">
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><span aria-current="page">Blog</span></li>
+          </ol>
+        </nav>
+
+        <header>
+          <h1 class="h2 article-title">Blog</h1>
+        </header>
+
+        <section class="content-section">
+          <p>Practical write-ups from projects I've built, covering React, Node.js, Express, MongoDB and Angular. Each article is based on real code.</p>
+        </section>
+
+        <section class="blog-posts">
+          <ul class="blog-posts-list">
+            <li class="blog-post-item">
+              <a href="/blog/ai-coding-assistants-full-stack-developer">
+
+                <figure class="blog-banner-box">
+                  <img src="/assets/images/blog/ai-coding-assistants-full-stack-developer.webp" alt="Using AI Coding Assistants: What to Delegate and What to Own" width="960" height="504" loading="lazy" decoding="async">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">AI &amp; Careers</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2026-10-07">7 Oct 2026</time>
+
+                    <span class="dot"></span>
+
+                    <p class="blog-category">3 min read</p>
+                  </div>
+
+                  <h2 class="h3 blog-item-title">Using AI Coding Assistants: What to Delegate and What to Own</h2>
+
+                  <p class="blog-text">How I use AI coding assistants as a full stack developer: the work I delegate, the work I always keep, and the rules that keep speed from costing code quality.</p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="/blog/bca-to-full-stack-developer-roadmap-india">
+
+                <figure class="blog-banner-box">
+                  <img src="/assets/images/blog/bca-to-full-stack-developer-roadmap-india.webp" alt="From BCA to Full Stack Developer: A Practical Roadmap" width="960" height="504" loading="lazy" decoding="async">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Career</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2026-10-07">7 Oct 2026</time>
+
+                    <span class="dot"></span>
+
+                    <p class="blog-category">4 min read</p>
+                  </div>
+
+                  <h2 class="h3 blog-item-title">From BCA to Full Stack Developer: A Practical Roadmap</h2>
+
+                  <p class="blog-text">The roadmap I'd follow from a BCA degree to a full stack developer job in India: fundamentals, one stack, real projects, deployment and internships.</p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="/blog/validate-image-uploads-tensorflow-js-mobilenet">
+
+                <figure class="blog-banner-box">
+                  <img src="/assets/images/blog/validate-image-uploads-tensorflow-js-mobilenet.webp" alt="Validating Image Uploads in the Browser with TensorFlow.js" width="960" height="504" loading="lazy" decoding="async">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Machine Learning</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2026-10-07">7 Oct 2026</time>
+
+                    <span class="dot"></span>
+
+                    <p class="blog-category">5 min read</p>
+                  </div>
+
+                  <h2 class="h3 blog-item-title">Validating Image Uploads in the Browser with TensorFlow.js</h2>
+
+                  <p class="blog-text">How I used TensorFlow.js and a pre-trained MobileNet model to check that uploaded listing photos look like real properties, right in the browser, before upload.</p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="/blog/role-based-access-control-mern-job-portal">
+
+                <figure class="blog-banner-box">
+                  <img src="/assets/images/blog/role-based-access-control-mern-job-portal.webp" alt="Role-Based Access Control in a MERN Job Portal" width="960" height="504" loading="lazy" decoding="async">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Backend</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2026-10-07">7 Oct 2026</time>
+
+                    <span class="dot"></span>
+
+                    <p class="blog-category">4 min read</p>
+                  </div>
+
+                  <h2 class="h3 blog-item-title">Role-Based Access Control in a MERN Job Portal</h2>
+
+                  <p class="blog-text">How I structured role-based access control with JWT and Express middleware in a MERN job portal, plus the ownership checks and checklist I use for secure APIs.</p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="/blog/google-sign-in-mern-jwt">
+
+                <figure class="blog-banner-box">
+                  <img src="/assets/images/blog/google-sign-in-mern-jwt.webp" alt="Adding Google Sign-In to a MERN App with Your Own JWT" width="960" height="504" loading="lazy" decoding="async">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Authentication</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2026-10-07">7 Oct 2026</time>
+
+                    <span class="dot"></span>
+
+                    <p class="blog-category">4 min read</p>
+                  </div>
+
+                  <h2 class="h3 blog-item-title">Adding Google Sign-In to a MERN App with Your Own JWT</h2>
+
+                  <p class="blog-text">A walkthrough of Google sign-in in a React and Express app: verifying the Google token, linking accounts, issuing your own JWT, and hardening it for production.</p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="/blog/upgrade-angular-11-to-19">
+
+                <figure class="blog-banner-box">
+                  <img src="/assets/images/blog/upgrade-angular-11-to-19.webp" alt="Upgrading Angular from v11 to v19: A Step-by-Step Approach" width="960" height="504" loading="lazy" decoding="async">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Frontend</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2026-10-07">7 Oct 2026</time>
+
+                    <span class="dot"></span>
+
+                    <p class="blog-category">5 min read</p>
+                  </div>
+
+                  <h2 class="h3 blog-item-title">Upgrading Angular from v11 to v19: A Step-by-Step Approach</h2>
+
+                  <p class="blog-text">A practical guide to upgrading a production Angular app from v11 to v19: the one-version-at-a-time process and the key changes in each release along the way.</p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="/blog/remote-developer-async-habits">
+
+                <figure class="blog-banner-box">
+                  <img src="/assets/images/blog/remote-developer-async-habits.webp" alt="Working Remotely as a Developer: Habits for Async Teams" width="960" height="504" loading="lazy" decoding="async">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Remote Work</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2026-10-07">7 Oct 2026</time>
+
+                    <span class="dot"></span>
+
+                    <p class="blog-category">3 min read</p>
+                  </div>
+
+                  <h2 class="h3 blog-item-title">Working Remotely as a Developer: Habits for Async Teams</h2>
+
+                  <p class="blog-text">Practical habits for remote developers in async teams: written decisions, reviewable pull requests, clear status updates, early blockers and healthy boundaries.</p>
+
+                </div>
+
+              </a>
+            </li>
+          </ul>
+        </section>
+
+      </article>
+
+      <footer class="site-footer">
+
+        <div class="site-footer-brand">
+          <p class="site-footer-name">Utsav Kalathiya</p>
+          <p>Full Stack Developer · Surat, Gujarat, India</p>
+        </div>
+
+        <nav class="site-footer-nav" aria-label="Footer">
+          <ul class="site-footer-links">
+            <li><a href="/about">About</a></li>
+            <li><a href="/experience">Experience</a></li>
+            <li><a href="/skills">Skills</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/resume">Resume</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <ul class="site-footer-social">
+          <li><a href="https://github.com/utsavkalathiya1602" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-github" aria-hidden="true"></ion-icon>GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/utsavkalathiya1602/" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon>LinkedIn</a></li>
+          <li><a href="mailto:utsavkalathiya0001@gmail.com"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon>Email</a></li>
+          <li><a href="/"><ion-icon name="globe-outline" aria-hidden="true"></ion-icon>Portfolio</a></li>
+        </ul>
+
+        <p class="site-footer-copy">&copy; <span data-year>2026</span> Utsav Kalathiya. All rights reserved.</p>
+
+      </footer>
+
+    </div>
+
+  </main>
+
+  <script src="/assets/js/script.js?v=4"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

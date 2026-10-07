@@ -1,0 +1,67 @@
+<p>At WRT InfoTech I upgraded a production Angular application from <strong>version 11 to version 19</strong>, eight major versions in one project, alongside redesigning parts of its UI. Jumps like that look scary, but they become manageable once you follow a strict, repeatable process.</p>
+
+<p>This post is that process: how to plan the upgrade, the loop to repeat for every version, and the version-specific changes that need the most attention between v11 and v19.</p>
+
+<h2>The golden rule: one major version at a time</h2>
+<p>Never jump straight from 11 to 19. Angular's update schematics (<code>ng update</code>) include automatic code migrations, and they are written to go from one major version to the next. Skip a version and you skip its migrations.</p>
+<pre><code>ng update @angular/core@12 @angular/cli@12
+# build, test, commit, then:
+ng update @angular/core@13 @angular/cli@13
+# ...and so on up to 19</code></pre>
+<p>The official <a href="https://angular.dev/update-guide" rel="noopener">Angular update guide</a> generates a checklist for each step. Open it for every version pair.</p>
+
+<h2>Before you start</h2>
+<ul>
+  <li><strong>Work on a dedicated branch</strong> and commit after every major version, so you can always step back one version instead of starting over.</li>
+  <li><strong>Get the current app green first.</strong> If the build or tests already fail on v11, you won't be able to tell old problems from new ones.</li>
+  <li><strong>Audit third-party dependencies.</strong> Every Angular-specific library (UI kits, charting, date pickers) needs a release that supports each version you pass through. Abandoned libraries are usually the biggest blocker, so find them before you begin and plan replacements.</li>
+  <li><strong>Check the Node.js and TypeScript requirements</strong> for each target version. You'll need to upgrade Node more than once along the way; Angular 19 needs Node 18.19.1+, 20.11.1+ or 22.</li>
+</ul>
+
+<h2>The loop to repeat for every version</h2>
+<ol>
+  <li>Upgrade Node.js if the target version requires it.</li>
+  <li>Run <code>ng update @angular/core@N @angular/cli@N</code>. The migrations run automatically, so read their output.</li>
+  <li>Update Angular Material and the CDK to the same major version, if you use them: <code>ng update @angular/material@N</code>.</li>
+  <li>Update other Angular libraries to their matching releases.</li>
+  <li>Fix compile errors, then run the build, the tests and a manual smoke test of the main user flows.</li>
+  <li>Commit, and only then move on to the next version.</li>
+</ol>
+
+<h2>What changes along the way (v11 → v19)</h2>
+
+<h3>v12–v13: the end of View Engine</h3>
+<p>Ivy, Angular's current compiler and renderer, became the only option: View Engine was deprecated in v12 and removed in v13. Internet Explorer 11 support was dropped in v13. Version 13 also supports RxJS 7, which deprecates <code>toPromise()</code> in favour of <code>firstValueFrom()</code> and <code>lastValueFrom()</code>, worth cleaning up while you're there.</p>
+
+<h3>v14: typed reactive forms</h3>
+<p>Reactive forms became strongly typed. The update migration swaps your existing <code>FormControl</code> and <code>FormGroup</code> usages to <code>UntypedFormControl</code> and friends, so behaviour doesn't change. You can adopt real types gradually afterwards. Standalone components also appeared as a developer preview.</p>
+
+<h3>v15: standalone APIs and the Material MDC switch</h3>
+<p>Standalone components became stable. For apps using Angular Material, this is the version to slow down: the components were rebuilt on Material Design Components (MDC). The old versions stayed available through <code>legacy</code> imports, but the new ones have different DOM structure and styles. Expect visual differences, and custom CSS that targets Material's internal classes may break.</p>
+
+<h3>v16: every dependency must support Ivy</h3>
+<p><code>ngcc</code>, the compatibility compiler that let old View Engine libraries run on Ivy, was removed. Any library that was never rebuilt for Ivy stops working here, which is why the dependency audit matters so much. v16 also introduced signals (as a preview) and required inputs.</p>
+
+<h3>v17: new control flow and new builder</h3>
+<p>Templates gained built-in control flow (<code>@if</code>, <code>@for</code>, <code>@switch</code>) and deferrable views (<code>@defer</code>). Moving off <code>*ngIf</code> and <code>*ngFor</code> is optional, and there's an automatic migration: <code>ng generate @angular/core:control-flow</code>. The legacy Material components were removed in v17, so the MDC migration from v15 must be finished first. A new esbuild-based <em>application</em> builder became the default for new projects, and existing apps can switch to it for much faster builds.</p>
+
+<h3>v18: zoneless preview and Material 3</h3>
+<p>Zoneless change detection arrived as an experimental option, and Material 3 theming became stable. For most apps this is one of the calmer steps.</p>
+
+<h3>v19: standalone by default</h3>
+<p>Components, directives and pipes are now standalone by default. The update migration adds <code>standalone: false</code> to everything still declared in an NgModule, so a module-based app keeps compiling unchanged and you can convert to standalone later, at your own pace.</p>
+
+<h2>Where the effort usually goes</h2>
+<ul>
+  <li><strong>Third-party libraries</strong> without Ivy builds (blocking at v16) or without releases for newer versions.</li>
+  <li><strong>Angular Material's MDC rewrite</strong> (v15–v17): mostly visual regressions and custom styles to rework.</li>
+  <li><strong>Stricter TypeScript</strong> in newer releases surfacing type errors that were always there.</li>
+  <li><strong>RxJS 7 deprecations</strong>, which are easy to fix but scattered across the codebase.</li>
+</ul>
+
+<h2>Upgrade first, modernise second</h2>
+<p>Resist converting to standalone components, the new control flow or signals in the middle of the upgrade. Get to v19 with the app behaving exactly as before, ship that, and then modernise in separate, reviewable steps. Mixing "upgrade" and "refactor" in the same commits makes every regression twice as hard to track down.</p>
+
+<h2>Takeaway</h2>
+<p>A large Angular upgrade isn't one big leap. It's the same small, boring loop repeated for every major version: update, migrate, fix, test, commit. Plan around your dependencies, take Material and Ivy-only libraries seriously, and keep modernisation for after you've landed.</p>
+<p>Read more about this work on my <a href="/experience">experience page</a>.</p>

@@ -159,17 +159,21 @@ const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
 // show one homepage tab ("about", "resume", "portfolio", "blog", "contact")
+// unknown names (e.g. #content from the skip link) leave the current tab alone
 const activatePage = function (name) {
   let found = false;
+  for (let i = 0; i < pages.length; i++) {
+    if (pages[i].dataset.page === name) found = true;
+  }
+  if (!found) return false;
 
   for (let i = 0; i < pages.length; i++) {
     const isMatch = pages[i].dataset.page === name;
     pages[i].classList.toggle("active", isMatch);
     if (navigationLinks[i]) navigationLinks[i].classList.toggle("active", isMatch);
-    if (isMatch) found = true;
   }
 
-  return found;
+  return true;
 }
 
 if (pages.length && navigationLinks.length) {
