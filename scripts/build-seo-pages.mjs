@@ -121,7 +121,7 @@ ${ogType === "profile" ? `  <meta property="profile:first_name" content="Utsav">
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 
   <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=6">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=7">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

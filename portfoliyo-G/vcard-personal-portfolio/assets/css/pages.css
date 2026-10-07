@@ -557,6 +557,10 @@ article:has(.post-body) .article-title,
 
   .site-footer { width: 950px; }
 
+  /* the menu bar sits in the card's top-right corner from here up (65px tall);
+     start the breadcrumb below it so long page names are never hidden */
+  article > .breadcrumb { margin-top: 50px; }
+
 }
 
 @media (min-width: 1250px) {
